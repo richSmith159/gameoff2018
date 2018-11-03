@@ -2,8 +2,11 @@
 #include "ScreenIndices.h"
 
 #include <Tempest\IMainGame.h>
+#include <Tempest\ResourceManager.h>
 
 #include <SDL\SDL.h>
+#include <string>
+#include <iostream>
 
 
 GameplayScreen::GameplayScreen(Tempest::Window* window) { m_window = window; }
@@ -32,8 +35,23 @@ void GameplayScreen::destroy() {
 
 void GameplayScreen::onEntry() {
 	m_camera.init(m_window->getScreenWidth(), m_window->getScreenHeight());
-	m_camera.setScale(32.0f);
+	m_camera.setScale(4.0f);
+	m_camera.setPosition(glm::vec2(0.0f, 0.0f));
 	initUI();
+	m_entityRenderer.init();
+
+	// load player texture
+	Tempest::glTexture playerTexture = Tempest::ResourceManager::getTexture("Assets/Textures/Entities/player.png");
+
+	m_player.init(
+		5,
+		0.5f,
+		&m_game->inputManager,
+		&m_camera,
+		0,
+		playerTexture
+	);
+	m_player.setPosition(glm::vec2(0.0f, 0.0f));
 }
 
 
@@ -44,13 +62,17 @@ void GameplayScreen::onExit() {
 
 void GameplayScreen::update(float deltaTime) {
 	m_camera.update();
+	m_player.update(deltaTime);
 	checkInput();
 }
 
 
 void GameplayScreen::draw() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glClearColor(0.5, 0.5, 0.8, 1);
+	glClearColor(0.1, 0.1, 0.1, 1);
+	m_entityRenderer.begin(&m_camera);
+	m_entityRenderer.render(&m_player);
+	m_entityRenderer.end();
 }
 
 
