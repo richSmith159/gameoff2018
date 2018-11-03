@@ -88,6 +88,8 @@ void EntityRenderer::begin(Tempest::Camera2D * activeCamera) {
 
 	// use the program and set the texture uniform location
 	m_program.use();
+	glDepthMask(GL_FALSE);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
 	glActiveTexture(GL_TEXTURE0);
 
@@ -125,7 +127,7 @@ void EntityRenderer::render(Player * player) {
 	);
 }
 
-void EntityRenderer::render(Enemy * enemy) {
+void EntityRenderer::render(EnemySquare * enemy) {
 	m_spriteBatch.draw(
 		enemy->calculateDestRect(),
 		enemy->getUVRect(),
@@ -140,4 +142,9 @@ void EntityRenderer::end() {
 	m_spriteBatch.end();
 	m_spriteBatch.renderBatch();
 	m_program.unuse();
+
+	// Reset to regular alpha blending
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glDepthMask(true);
+
 }
