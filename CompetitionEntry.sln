@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tempest", "Tempest\Tempest.vcxproj", "{907EE14B-EED3-494B-BCF4-9C7FDC896B23}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Blast", "Blast\Blast.vcxproj", "{07FE7275-34DC-44EB-8644-D00CEAFA3C86}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{907EE14B-EED3-494B-BCF4-9C7FDC896B23}.Release|x64.Build.0 = Release|x64
 		{907EE14B-EED3-494B-BCF4-9C7FDC896B23}.Release|x86.ActiveCfg = Release|Win32
 		{907EE14B-EED3-494B-BCF4-9C7FDC896B23}.Release|x86.Build.0 = Release|Win32
+		{07FE7275-34DC-44EB-8644-D00CEAFA3C86}.Debug|x64.ActiveCfg = Debug|x64
+		{07FE7275-34DC-44EB-8644-D00CEAFA3C86}.Debug|x64.Build.0 = Debug|x64
+		{07FE7275-34DC-44EB-8644-D00CEAFA3C86}.Debug|x86.ActiveCfg = Debug|Win32
+		{07FE7275-34DC-44EB-8644-D00CEAFA3C86}.Debug|x86.Build.0 = Debug|Win32
+		{07FE7275-34DC-44EB-8644-D00CEAFA3C86}.Release|x64.ActiveCfg = Release|x64
+		{07FE7275-34DC-44EB-8644-D00CEAFA3C86}.Release|x64.Build.0 = Release|x64
+		{07FE7275-34DC-44EB-8644-D00CEAFA3C86}.Release|x86.ActiveCfg = Release|Win32
+		{07FE7275-34DC-44EB-8644-D00CEAFA3C86}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
