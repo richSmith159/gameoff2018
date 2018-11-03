@@ -36,8 +36,7 @@ void Player::update(float deltaTime) {
 
 	glm::vec2 mouseCoords = m_inputManager->getMouseCoords();
 	mouseCoords = m_camera->convertScreenToWorld(mouseCoords);
-	glm::vec2 centerPosition = m_position + glm::vec2(m_width * 0.5f, m_height * 0.5f);
-	m_direction = glm::normalize(mouseCoords - centerPosition);
+	m_direction = glm::normalize(mouseCoords - getCenterPosition());
 
 	if (m_inputManager->isKeyDown(SDLK_w)) {
 		m_position += m_direction * m_speed * deltaTime;

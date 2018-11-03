@@ -25,5 +25,6 @@ void EnemySquare::init(glm::vec2 position, int health, int speed, Player * playe
 }
 
 void EnemySquare::update(float deltaTime) {
-	// empty
+	m_direction = glm::normalize(m_playerTarget->getCenterPosition() - getCenterPosition());
+	m_position += m_direction * m_speed * deltaTime;
 }

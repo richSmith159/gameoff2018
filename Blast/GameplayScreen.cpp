@@ -53,7 +53,7 @@ void GameplayScreen::onEntry() {
 	);
 	m_player.setPosition(glm::vec2(0.0f, 0.0f));
 
-	m_testSquare.init(glm::vec2(1.0f, 1.0f), 10, 1, &m_player);
+	m_testSquare.init(glm::vec2(100.0f, 100.0f), 0.01f, 1, &m_player);
 }
 
 
@@ -64,8 +64,8 @@ void GameplayScreen::onExit() {
 
 void GameplayScreen::update(float deltaTime) {
 	m_camera.update();
-	m_testSquare.update(deltaTime);
 	m_player.update(deltaTime);
+	m_testSquare.update(deltaTime);
 	checkInput();
 }
 
