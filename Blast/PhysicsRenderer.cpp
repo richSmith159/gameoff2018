@@ -82,6 +82,33 @@ void PhysicsRenderer::begin(Tempest::Camera2D * activeCamera) {
 	glUniformMatrix4fv(pUniform, 1, GL_FALSE, &projectionMatrix[0][0]);
 }
 
+void PhysicsRenderer::draw(b2Body * body, Tempest::ColorRGBA8 color) {
+	for (b2Fixture* fixture = body->GetFixtureList(); fixture; fixture = fixture->GetNext()) {
+		int startIndex = m_verts.size();
+		switch (fixture->GetType()) {
+		default:
+			b2PolygonShape* shape = (b2PolygonShape*)fixture->GetShape();
+			int numberOfVerts = shape->m_vertices->Length;
+			m_verts.resize(startIndex + numberOfVerts);
+			for (unsigned int i = 0; i < numberOfVerts; i++) {
+				b2Vec2 worldVertPos = body->GetWorldPoint(shape->m_vertices[i]);
+				m_verts[startIndex + i].position.x = worldVertPos.x;
+				m_verts[startIndex + i].position.y = worldVertPos.y;
+				m_verts[startIndex + i].color = color;
+			}
+			m_indices.reserve(m_indices.size() + numberOfVerts * 2);
+			for (unsigned int i = 0; i < numberOfVerts - 1; i++) {
+				m_indices.push_back(startIndex + i);
+				m_indices.push_back(startIndex + i + 1);
+			}
+			m_indices.push_back(startIndex + numberOfVerts + 1);
+			m_indices.push_back(startIndex);
+			break;
+		}
+		
+	}
+}
+
 void PhysicsRenderer::render() {
 
 	glLineWidth(m_lineWidth);

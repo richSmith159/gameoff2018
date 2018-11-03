@@ -5,6 +5,7 @@
 #include <Tempest\GLSLProgram.h>
 #include <Tempest\GLShader.h>
 
+#include <Box2D\Box2D.h>
 #include <vector>
 #include <glm\glm\glm.hpp>
 
@@ -21,6 +22,7 @@ public:
 
 	void init();
 	void begin(Tempest::Camera2D* activeCamera);
+	void draw(b2Body* body, Tempest::ColorRGBA8 color);
 	void render();
 	void end();
 	void dispose();
