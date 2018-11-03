@@ -135,6 +135,7 @@
     <ClCompile Include="EntityRenderer.cpp" />
     <ClCompile Include="GameplayScreen.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PhysicsRenderer.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +145,7 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityRenderer.h" />
     <ClInclude Include="GameplayScreen.h" />
+    <ClInclude Include="PhysicsRenderer.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="ScreenIndices.h" />
     <ClInclude Include="Spawner.h" />
