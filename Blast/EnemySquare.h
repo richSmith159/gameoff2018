@@ -11,7 +11,7 @@ public:
 	EnemySquare();
 	~EnemySquare();
 
-	void init(glm::vec2 position, int health, int speed, Player* player);
+	void init(glm::vec2 position, float health, float speed, Player* player) override;
 	void update(float deltaTime) override;
 	
 };

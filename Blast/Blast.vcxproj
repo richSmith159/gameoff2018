@@ -146,6 +146,7 @@
     <ClInclude Include="GameplayScreen.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="ScreenIndices.h" />
+    <ClInclude Include="Spawner.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

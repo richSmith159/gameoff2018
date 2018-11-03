@@ -8,7 +8,7 @@ class Enemy : public Entity
 public:
 	Enemy();
 	~Enemy();
-
+	virtual void init(glm::vec2 position, float health, float speed, Player* player) = 0;
 	virtual void update(float deltaTime) = 0;
 
 	// getters
