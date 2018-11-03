@@ -2,6 +2,7 @@
 #include "EntityRenderer.h"
 #include "Player.h"
 #include "EnemySquare.h"
+#include "Spawner.h"
 
 #include <Tempest\Window.h>
 #include <Tempest\IGameScreen.h>
@@ -35,4 +36,6 @@ private:
 	Player m_player;
 	EntityRenderer m_entityRenderer;
 	EnemySquare m_testSquare;
+
+	Spawner<EnemySquare> m_squareSpawner;
 };

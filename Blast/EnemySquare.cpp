@@ -1,5 +1,7 @@
 #include "EnemySquare.h"
 
+#include <iostream>
+
 #include <Tempest\ResourceManager.h>
 
 
@@ -13,7 +15,7 @@ EnemySquare::~EnemySquare() {
 	// empty
 }
 
-void EnemySquare::init(glm::vec2 position, int health, int speed, Player * player) {
+void EnemySquare::init(glm::vec2 position, float health, float speed, Player * player) {
 	m_position = position;
 	m_health = health;
 	m_speed = speed;
@@ -27,4 +29,5 @@ void EnemySquare::init(glm::vec2 position, int health, int speed, Player * playe
 void EnemySquare::update(float deltaTime) {
 	m_direction = glm::normalize(m_playerTarget->getCenterPosition() - getCenterPosition());
 	m_position += m_direction * m_speed * deltaTime;
+	std::cout << m_speed << std::endl;
 }

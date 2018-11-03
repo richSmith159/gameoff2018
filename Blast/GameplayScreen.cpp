@@ -53,7 +53,7 @@ void GameplayScreen::onEntry() {
 	);
 	m_player.setPosition(glm::vec2(0.0f, 0.0f));
 
-	m_testSquare.init(glm::vec2(100.0f, 100.0f), 0.01f, 1, &m_player);
+	m_squareSpawner.init(0.1f, 10.0f, 0.1f, &m_player);
 }
 
 
@@ -64,8 +64,11 @@ void GameplayScreen::onExit() {
 
 void GameplayScreen::update(float deltaTime) {
 	m_camera.update();
+	m_squareSpawner.update();
 	m_player.update(deltaTime);
-	m_testSquare.update(deltaTime);
+	for (unsigned int i = 0; i < m_squareSpawner.m_entities.size(); i++) {
+		m_squareSpawner.m_entities[i].update(deltaTime);
+	}
 	checkInput();
 }
 
@@ -74,7 +77,9 @@ void GameplayScreen::draw() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	m_entityRenderer.begin(&m_camera);
-	m_entityRenderer.render(&m_testSquare);
+	for (unsigned int i = 0; i < m_squareSpawner.m_entities.size(); i++) {
+		m_entityRenderer.render(&m_squareSpawner.m_entities[i]);
+	}
 	m_entityRenderer.render(&m_player);
 	m_entityRenderer.end();
 }
