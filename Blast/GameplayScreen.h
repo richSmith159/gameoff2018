@@ -1,4 +1,6 @@
 #pragma once
+#include "EntityRenderer.h"
+#include "Player.h"
 
 #include <Tempest\Window.h>
 #include <Tempest\IGameScreen.h>
@@ -28,5 +30,8 @@ private:
 	Tempest::Window* m_window;
 	Tempest::GUI m_gui;
 	Tempest::Camera2D m_camera;
+
+	Player m_player;
+	EntityRenderer m_entityRenderer;
 
 };

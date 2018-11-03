@@ -1,5 +1,7 @@
 #include "EntityRenderer.h"
 
+#include <iostream>
+
 
 const char* VERTEX_SHADER_SOURCE = R"(
 #version 330
@@ -30,6 +32,7 @@ void main() {
     fragmentPosition = vertexPosition;
     fragmentColor = vertexColor;
     fragmentUV = vec2(vertexUV.x, 1.0 - vertexUV.y);
+}
 )";
 
 
@@ -47,7 +50,7 @@ uniform sampler2D textureSampler;
 
 void main() {
     
-    vec4 textureColor = texture(mySampler, fragmentUV);
+    vec4 textureColor = texture(textureSampler, fragmentUV);
     color = fragmentColor * textureColor;
 }
 )";
@@ -63,8 +66,9 @@ EntityRenderer::~EntityRenderer() {
 }
 
 void EntityRenderer::init() {
-	// init the shader program
+	// init the shader program and spritebatch
 	m_program.init();
+	m_spriteBatch.init();
 
 	// init and compile shaders
 	m_vertexShader.init(Tempest::ShaderType::VERTEX);
@@ -72,20 +76,20 @@ void EntityRenderer::init() {
 	m_vertexShader.compile(VERTEX_SHADER_SOURCE);
 	m_fragmentShader.compile(FRAGMENT_SHADER_SOURCE);
 
-	// bind shader attributes
+	// bind shader attributes and link shaders
 	m_program.bindAttribute("vertextPosition");
 	m_program.bindAttribute("vertexColor");
 	m_program.bindAttribute("vertexUV");
-
-	// link shaders and init spritebatch
 	m_program.linkShaders(m_vertexShader.getShaderID(), m_fragmentShader.getShaderID());
-	m_spriteBatch.init();
+
 }
 
 void EntityRenderer::begin(Tempest::Camera2D * activeCamera) {
 
 	// use the program and set the texture uniform location
 	m_program.use();
+
+	glActiveTexture(GL_TEXTURE0);
 
 	GLint textureUniform = m_program.getUniformLocation("textureSampler");
 	glUniform1i(textureUniform, 0);
@@ -107,6 +111,28 @@ void EntityRenderer::render(Entity * entity) {
 		1.0f,
 		entity->getColor(),
 		entity->getDirection()
+	);
+}
+
+void EntityRenderer::render(Player * player) {
+	m_spriteBatch.draw(
+		player->calculateDestRect(),
+		player->getUVRect(),
+		player->getTextureId(),
+		1.0f,
+		player->getColor(),
+		player->getDirection()
+	);
+}
+
+void EntityRenderer::render(Enemy * enemy) {
+	m_spriteBatch.draw(
+		enemy->calculateDestRect(),
+		enemy->getUVRect(),
+		enemy->getTextureId(),
+		1.0f,
+		enemy->getColor(),
+		enemy->getDirection()
 	);
 }
 

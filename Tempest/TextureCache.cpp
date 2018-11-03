@@ -23,6 +23,7 @@ namespace Tempest {
 		glGenTextures(1, &newTexture.id);
 
 		// use SOIL library to load raw data from image file
+		std::cout << filepath.c_str() << std::endl;
 		unsigned char* textureData = SOIL_load_image(filepath.c_str(), &newTexture.width, &newTexture.height, 0, SOIL_LOAD_RGBA);
 
 		if (textureData == nullptr) {
