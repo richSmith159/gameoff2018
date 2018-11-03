@@ -52,6 +52,8 @@ void GameplayScreen::onEntry() {
 		playerTexture
 	);
 	m_player.setPosition(glm::vec2(0.0f, 0.0f));
+
+	m_testSquare.init(glm::vec2(100.0f, 100.0f), 0.01f, 1, &m_player);
 }
 
 
@@ -63,14 +65,16 @@ void GameplayScreen::onExit() {
 void GameplayScreen::update(float deltaTime) {
 	m_camera.update();
 	m_player.update(deltaTime);
+	m_testSquare.update(deltaTime);
 	checkInput();
 }
 
 
 void GameplayScreen::draw() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glClearColor(0.1, 0.1, 0.1, 1);
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	m_entityRenderer.begin(&m_camera);
+	m_entityRenderer.render(&m_testSquare);
 	m_entityRenderer.render(&m_player);
 	m_entityRenderer.end();
 }

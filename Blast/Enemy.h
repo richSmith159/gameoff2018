@@ -1,6 +1,7 @@
 #pragma once
-
 #include "Entity.h"
+#include "Player.h"
+
 
 class Enemy : public Entity
 {
@@ -25,6 +26,7 @@ protected:
 
 	float m_health;
 	float m_speed;
+	Player* m_playerTarget;
 
 };
 

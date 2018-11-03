@@ -16,6 +16,7 @@ public:
 	int getTextureId() { return m_texture.id; }
 	glm::vec4 getUVRect() { return m_uvRect; }
 	Tempest::ColorRGBA8 getColor() { return m_color; }
+	glm::vec2 getCenterPosition();
 
 	// setters
 	void setPosition(const glm::vec2& newPosition) { m_position = newPosition; }

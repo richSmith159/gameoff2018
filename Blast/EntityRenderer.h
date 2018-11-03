@@ -1,6 +1,6 @@
 #pragma once
-#include "Enemy.h"
 #include "Entity.h"
+#include "EnemySquare.h"
 #include "Player.h"
 
 #include <Tempest\Camera2D.h>
@@ -19,7 +19,7 @@ public:
 	void begin(Tempest::Camera2D* activeCamera);
 	void render(Entity* entity);
 	void render(Player* player);
-	void render(Enemy* enemy);
+	void render(EnemySquare* enemy);
 	void end();
 
 private:
