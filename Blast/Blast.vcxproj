@@ -70,7 +70,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SoutionDir)deps/include/;$(SolutionDir);$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)deps/include/;$(SolutionDir);$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)deps/lib/Release;$(SolutionDir)Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -85,7 +85,7 @@
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>Tempest.lib;SDL2.lib;SDL2_mixer.lib;SDL2main.lib;opengl32.lib;glew32.lib;OpenAL32.lib;SOIL.lib;Box2D.lib;CEGUIBase-0_d.lib;CEGUICoreWindowRendererSet_d.lib;CEGUIExpatParser_d.lib;CEGUIOpenGLRenderer-0_d.lib;CEGUISILLYImageCodec_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2_mixer.lib;SDL2main.lib;opengl32.lib;glew32.lib;OpenAL32.lib;SOIL.lib;Box2D.lib;CEGUIBase-0_d.lib;CEGUICoreWindowRendererSet_d.lib;CEGUIExpatParser_d.lib;CEGUIOpenGLRenderer-0_d.lib;CEGUISILLYImageCodec_d.lib;Tempest.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>

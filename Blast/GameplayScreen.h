@@ -1,6 +1,7 @@
 #pragma once
 #include "EntityRenderer.h"
 #include "Player.h"
+#include "PhysicsRenderer.h"
 #include "EnemySquare.h"
 #include "Spawner.h"
 
@@ -8,6 +9,8 @@
 #include <Tempest\IGameScreen.h>
 #include <Tempest\GUI.h>
 #include <Tempest\Camera2D.h>
+
+#include <Box2D\Box2D.h>
 
 class GameplayScreen : public Tempest::IGameScreen
 {
@@ -26,6 +29,8 @@ public:
 
 private:
 
+	bool m_renderDebug = true;
+
 	void initUI();
 	void checkInput();
 
@@ -33,9 +38,12 @@ private:
 	Tempest::GUI m_gui;
 	Tempest::Camera2D m_camera;
 
-	Player m_player;
 	EntityRenderer m_entityRenderer;
+	PhysicsRenderer m_physicsRenderer;
+	Player m_player;
 	EnemySquare m_testSquare;
 
 	Spawner<EnemySquare> m_squareSpawner;
+
+	std::unique_ptr<b2World> m_world;
 };

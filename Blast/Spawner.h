@@ -3,6 +3,7 @@
 
 #include <Tempest\GLObjects.h>
 
+#include <Box2D\Box2D.h>
 #include <glm\glm\glm.hpp>
 #include <random>
 #include <vector>
@@ -10,27 +11,30 @@
 template <class T>
 class Spawner {
 public:
-	void init(float spawnRate, float spawnHealth, float spawnSpeed, Player* player);
+	void init(float spawnRate, float spawnHealth, float spawnSpeed, Player* player, b2World* physicsWorld);
 	void update();
 	void spawn(
 		glm::vec2 position,
 		float health,
 		float speed,
-		Player* player
+		Player* player,
+		b2World* physicsWorld
 	);
 	std::vector<T> m_entities;
 	float m_spawnRate;
 	float m_spawnHealth;
 	float m_spawnSpeed;
 	Player* m_playerHandle;
+	b2World* m_world;
 };
 
 template <class T>
-void Spawner<T>::init(float spawnRate, float spawnHealth, float spawnSpeed, Player* player) {
+void Spawner<T>::init(float spawnRate, float spawnHealth, float spawnSpeed, Player* player, b2World* physicsWorld) {
 	m_spawnRate = spawnRate;
 	m_spawnHealth = spawnHealth;
 	m_spawnSpeed = spawnSpeed;
 	m_playerHandle = player;
+	m_world = physicsWorld;
 }
 
 template <class T>
@@ -38,10 +42,11 @@ void Spawner<T>::spawn(
 	glm::vec2 position,
 	float health,
 	float speed,
-	Player* player
+	Player* player,
+	b2World* physicsWorld
 ) {
 	T newEntity;
-	newEntity.init(position, health, speed, player);
+	newEntity.init(position, health, speed, player, physicsWorld);
 	m_entities.push_back(newEntity);
 }
 
@@ -59,7 +64,8 @@ void Spawner<T>::update() {
 			),
 			m_spawnHealth,
 			m_spawnSpeed,
-			m_playerHandle
+			m_playerHandle,
+			m_world
 		);
 	}
 }

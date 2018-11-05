@@ -37,4 +37,3 @@ private:
 	int m_numElements = 0;
 	float m_lineWidth = 0.1f;
 };
-

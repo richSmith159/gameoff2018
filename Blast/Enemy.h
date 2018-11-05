@@ -2,13 +2,15 @@
 #include "Entity.h"
 #include "Player.h"
 
+#include <Box2D\Box2D.h>
+
 
 class Enemy : public Entity
 {
 public:
 	Enemy();
 	~Enemy();
-	virtual void init(glm::vec2 position, float health, float speed, Player* player) = 0;
+	virtual void init(glm::vec2 position, float health, float speed, Player* player, b2World* physicsWorld) = 0;
 	virtual void update(float deltaTime) = 0;
 
 	// getters

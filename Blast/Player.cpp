@@ -1,8 +1,9 @@
 #include "Player.h"
 
+#include <Tempest\ResourceManager.h>
+
 #include <glm\glm\glm.hpp>
 #include <SDL\SDL.h>
-#include <iostream>
 
 
 Player::Player() {
@@ -19,14 +20,13 @@ void Player::init(
 	const float & speed,
 	Tempest::InputManager * inputManager,
 	Tempest::Camera2D * camera,
-	const int & points,
-	Tempest::glTexture texture) {
+	const int & points) {
 	m_speed = speed;
 	m_lives = lives;
 	m_inputManager = inputManager;
 	m_camera = camera;
 	m_points = points;
-	m_texture = texture;
+	m_texture = Tempest::ResourceManager::getTexture("Assets/Textures/Entities/player.png");
 	m_width = 16;
 	m_height = 16;
 	m_color = Tempest::ColorRGBA8(255, 255, 255, 255);
@@ -52,5 +52,8 @@ void Player::update(float deltaTime) {
 	if (m_inputManager->isKeyDown(SDLK_d)) {
 		m_position.x += m_speed * deltaTime;
 	}
+
+	// TODO: pause screen
+	if (m_inputManager->isKeyDown(SDLK_ESCAPE)) { exit(69); }
 
 }

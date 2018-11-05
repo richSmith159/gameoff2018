@@ -2,6 +2,7 @@
 
 #include <Tempest\GLObjects.h>
 
+#include <Box2D\Box2D.h>
 #include <glm\glm\glm.hpp>
 
 class Entity
@@ -17,6 +18,7 @@ public:
 	glm::vec4 getUVRect() { return m_uvRect; }
 	Tempest::ColorRGBA8 getColor() { return m_color; }
 	glm::vec2 getCenterPosition();
+	b2Body* getBody() { return m_body; }
 
 	// setters
 	void setPosition(const glm::vec2& newPosition) { m_position = newPosition; }
@@ -27,6 +29,8 @@ public:
 
 
 protected:
+
+	void orientPhysicsBodyToDirection(glm::vec2 centerPosition);
 	
 	glm::vec2 m_position;
 	glm::vec2 m_direction;
@@ -36,6 +40,9 @@ protected:
 
 	float m_width;
 	float m_height;
+
+	b2Body* m_body = nullptr;
+	b2Fixture* m_fixtures[3];
 
 };
 

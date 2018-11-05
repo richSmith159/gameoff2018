@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tempest", "Tempest\Tempest.vcxproj", "{907EE14B-EED3-494B-BCF4-9C7FDC896B23}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Blast", "Blast\Blast.vcxproj", "{07FE7275-34DC-44EB-8644-D00CEAFA3C86}"
+	ProjectSection(ProjectDependencies) = postProject
+		{907EE14B-EED3-494B-BCF4-9C7FDC896B23} = {907EE14B-EED3-494B-BCF4-9C7FDC896B23}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

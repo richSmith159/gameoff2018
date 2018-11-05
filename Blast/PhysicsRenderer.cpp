@@ -1,7 +1,7 @@
 #include "PhysicsRenderer.h"
 
 
-const char* VERTEX_SHADER_SOURCE = R"(
+const char* PHYSICS_VERTEX_SHADER_SOURCE = R"(
 #version 330
 //input data from the VBO. Each vertex is 2 floats
 in vec2 vertexPosition;
@@ -18,7 +18,7 @@ void main() {
 }
 )";
 
-const char* FRAGMENT_SHADER_SOURCE = R"(
+const char* PHYSICS_FRAGMENT_SHADER_SOURCE = R"(
 #version 330
 in vec2 fragmentPosition;
 in vec4 fragmentColor;
@@ -46,8 +46,8 @@ void PhysicsRenderer::init() {
 	// init and compile shaders
 	m_vertexShader.init(Tempest::ShaderType::VERTEX);
 	m_fragmentShader.init(Tempest::ShaderType::FRAGMENT);
-	m_vertexShader.compile(VERTEX_SHADER_SOURCE);
-	m_fragmentShader.compile(FRAGMENT_SHADER_SOURCE);
+	m_vertexShader.compile(PHYSICS_VERTEX_SHADER_SOURCE);
+	m_fragmentShader.compile(PHYSICS_FRAGMENT_SHADER_SOURCE);
 
 	// bind shader attributes and link shaders
 	m_program.bindAttribute("vertextPosition");
@@ -88,7 +88,7 @@ void PhysicsRenderer::draw(b2Body * body, Tempest::ColorRGBA8 color) {
 		switch (fixture->GetType()) {
 		default:
 			b2PolygonShape* shape = (b2PolygonShape*)fixture->GetShape();
-			int numberOfVerts = shape->m_vertices->Length;
+			int numberOfVerts = shape->m_vertices->Length();
 			m_verts.resize(startIndex + numberOfVerts);
 			for (unsigned int i = 0; i < numberOfVerts; i++) {
 				b2Vec2 worldVertPos = body->GetWorldPoint(shape->m_vertices[i]);
