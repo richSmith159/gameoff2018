@@ -25,6 +25,7 @@ public:
 	void setDirection(const glm::vec2& newDirection) { m_direction = newDirection; }
 	void setTexture(Tempest::glTexture newTexture) { m_texture = newTexture; }
 
+	// calculations
 	glm::vec4 calculateDestRect() { return glm::vec4(m_position.x, m_position.y, m_width, m_height); }
 
 
