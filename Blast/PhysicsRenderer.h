@@ -22,6 +22,7 @@ public:
 
 	void init();
 	void begin(Tempest::Camera2D* activeCamera);
+	void drawSquare(b2Body* body, Tempest::ColorRGBA8 color);
 	void draw(b2Body* body, Tempest::ColorRGBA8 color);
 	void render();
 	void end();

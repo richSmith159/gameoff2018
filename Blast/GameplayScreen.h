@@ -41,7 +41,6 @@ private:
 	EntityRenderer m_entityRenderer;
 	PhysicsRenderer m_physicsRenderer;
 	Player m_player;
-	EnemySquare m_testSquare;
 
 	Spawner<EnemySquare> m_squareSpawner;
 

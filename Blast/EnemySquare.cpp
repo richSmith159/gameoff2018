@@ -31,20 +31,25 @@ void EnemySquare::init(glm::vec2 position, float health, float speed, Player * p
 
 	// init physics body
 	b2BodyDef bodyDef;
-	bodyDef.type = b2_dynamicBody;
+	bodyDef.type = b2_staticBody;
 	bodyDef.position.Set(m_position.x, m_position.y);
-	bodyDef.fixedRotation = true;
+	bodyDef.fixedRotation = false;
+	bodyDef.angle = 0;
 	m_body = physicsWorld->CreateBody(&bodyDef);
 
 	// init physics fixtures
 	b2PolygonShape squareShape;
 	squareShape.SetAsBox(m_width * 0.5f, m_height * 0.5f);
+	std::cout << "initial verts" << std::endl;
+	for (int i = 0; i < squareShape.m_vertices->Length(); i++) {
+		std::cout << squareShape.m_vertices[i].x << ", " << squareShape.m_vertices[i].y << std::endl;
+	}
+	std::cout << "---------" << std::endl;
+
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = &squareShape;
-	fixtureDef.density = 1.0f;
-	fixtureDef.friction = 0.3f;
 	m_fixtures[0] = m_body->CreateFixture(&fixtureDef);
-
+	
 }
 
 void EnemySquare::update(float deltaTime) {

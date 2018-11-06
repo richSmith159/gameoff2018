@@ -61,7 +61,6 @@ void GameplayScreen::onEntry() {
 	m_player.setPosition(glm::vec2(0.0f, 0.0f));
 
 	m_squareSpawner.init(0.1f, 10.0f, 0.1f, &m_player, m_world.get());
-	m_testSquare.init(glm::vec2(5.0f, 5.0f), 10.0f, 0.1f, &m_player, m_world.get());
 }
 
 
@@ -72,12 +71,11 @@ void GameplayScreen::onExit() {
 
 void GameplayScreen::update(float deltaTime) {
 	m_camera.update();
-	//m_squareSpawner.update();
+	m_squareSpawner.update();
 	m_player.update(deltaTime);
-	m_testSquare.update(deltaTime);
-	//for (unsigned int i = 0; i < m_squareSpawner.m_entities.size(); i++) {
-	//	m_squareSpawner.m_entities[i].update(deltaTime);
-	//}
+	for (unsigned int i = 0; i < m_squareSpawner.m_entities.size(); i++) {
+		m_squareSpawner.m_entities[i].update(deltaTime);
+	}
 
 	if (m_game->inputManager.isKeyDown(SDLK_p)) { m_renderDebug = !m_renderDebug; }
 
@@ -89,21 +87,18 @@ void GameplayScreen::draw() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	m_entityRenderer.begin(&m_camera);
-	m_entityRenderer.render(&m_testSquare);
-	//for (unsigned int i = 0; i < m_squareSpawner.m_entities.size(); i++) {
-	//	m_entityRenderer.render(&m_squareSpawner.m_entities[i]);
-	//}
+	for (unsigned int i = 0; i < m_squareSpawner.m_entities.size(); i++) {
+		m_entityRenderer.render(&m_squareSpawner.m_entities[i]);
+	}
 	m_entityRenderer.render(&m_player);
 	m_entityRenderer.end();
 
 	if (m_renderDebug) {
 		Tempest::ColorRGBA8 debugColor = Tempest::ColorRGBA8(255, 0, 0, 255);
 		m_physicsRenderer.begin(&m_camera);
-		m_physicsRenderer.draw(m_testSquare.getBody(), debugColor);
-		//for (unsigned int i = 0; i < m_squareSpawner.m_entities.size(); i++) {
-			
-		//	m_physicsRenderer.draw(m_squareSpawner.m_entities[i].getBody(), debugColor);
-		//}
+		for (unsigned int i = 0; i < m_squareSpawner.m_entities.size(); i++) {	
+			m_physicsRenderer.drawSquare(m_squareSpawner.m_entities[i].getBody(), debugColor);
+		}
 		m_physicsRenderer.render();
 		m_physicsRenderer.end();
 	}
