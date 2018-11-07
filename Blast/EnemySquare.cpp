@@ -40,12 +40,6 @@ void EnemySquare::init(glm::vec2 position, float health, float speed, Player * p
 	// init physics fixtures
 	b2PolygonShape squareShape;
 	squareShape.SetAsBox(m_width * 0.5f, m_height * 0.5f);
-	std::cout << "initial verts" << std::endl;
-	for (int i = 0; i < squareShape.m_vertices->Length(); i++) {
-		std::cout << squareShape.m_vertices[i].x << ", " << squareShape.m_vertices[i].y << std::endl;
-	}
-	std::cout << "---------" << std::endl;
-
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = &squareShape;
 	m_fixtures[0] = m_body->CreateFixture(&fixtureDef);

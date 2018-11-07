@@ -120,17 +120,13 @@ void PhysicsRenderer::draw(b2Body * body, Tempest::ColorRGBA8 color) {
 		default:
 			b2PolygonShape* shape = (b2PolygonShape*)fixture->GetShape();
 			int numberOfVerts = shape->m_vertices->Length();
-			std::cout << numberOfVerts << std::endl;
 			m_verts.resize(startIndex + numberOfVerts);
 			for (unsigned int i = 0; i < numberOfVerts; i++) {
 				b2Vec2 worldVertPos = body->GetWorldPoint(shape->m_vertices[i]);
-				std::cout << worldVertPos.x << ", " << worldVertPos.y << std::endl;
 				m_verts[startIndex + i].position.x = worldVertPos.x;
 				m_verts[startIndex + i].position.y = worldVertPos.y;
 				m_verts[startIndex + i].color = color;
 			}
-
-			std::cout << "-- -- -- -- --" << std::endl;
 
 			m_indices.reserve(m_indices.size() + numberOfVerts * 2);
 			for (unsigned int i = 0; i < numberOfVerts - 1; i++) {
