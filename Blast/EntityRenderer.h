@@ -1,4 +1,5 @@
 #pragma once
+#include "Bullet.h"
 #include "Entity.h"
 #include "EnemySquare.h"
 #include "Player.h"
@@ -20,6 +21,7 @@ public:
 	void render(Entity* entity);
 	void render(Player* player);
 	void render(EnemySquare* enemy);
+	void render(Bullet* bullet);
 	void end();
 
 private:

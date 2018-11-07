@@ -61,6 +61,17 @@ void GameplayScreen::onEntry() {
 	m_player.setPosition(glm::vec2(0.0f, 0.0f));
 
 	m_squareSpawner.init(0.1f, 10.0f, 0.1f, &m_player, m_world.get());
+	m_testWeapon.init(
+		"test",
+		0.025f,
+		100.0f,
+		1,
+		1.0f,
+		1.0f,
+		20.0f,
+		8.0f,
+		Tempest::ResourceManager::getTexture("Assets/Textures/Entities/yellow_laser.png")
+	);
 }
 
 
@@ -78,7 +89,16 @@ void GameplayScreen::update(float deltaTime) {
 	}
 
 	if (m_game->inputManager.isKeyDown(SDLK_p)) { m_renderDebug = !m_renderDebug; }
+	m_testWeapon.update(
+		m_game->inputManager.isKeyDown(SDL_BUTTON_LEFT),
+		m_player.getCenterPosition(),
+		m_player.getDirection(),
+		deltaTime
+	);
 
+	for (unsigned int i = 0; i < m_testWeapon.m_bullets.size(); i++) {
+		m_testWeapon.m_bullets[i].update(deltaTime);
+	}
 	checkInput();
 }
 
@@ -89,6 +109,10 @@ void GameplayScreen::draw() {
 	m_entityRenderer.begin(&m_camera);
 	for (unsigned int i = 0; i < m_squareSpawner.m_entities.size(); i++) {
 		m_entityRenderer.render(&m_squareSpawner.m_entities[i]);
+	}
+
+	for (unsigned int i = 0; i < m_testWeapon.m_bullets.size(); i++) {
+		m_entityRenderer.render(&m_testWeapon.m_bullets[i]);
 	}
 	m_entityRenderer.render(&m_player);
 	m_entityRenderer.end();

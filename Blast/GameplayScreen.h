@@ -4,6 +4,7 @@
 #include "PhysicsRenderer.h"
 #include "EnemySquare.h"
 #include "Spawner.h"
+#include "Weapon.h"
 
 #include <Tempest\Window.h>
 #include <Tempest\IGameScreen.h>
@@ -45,4 +46,7 @@ private:
 	Spawner<EnemySquare> m_squareSpawner;
 
 	std::unique_ptr<b2World> m_world;
+
+	Weapon m_testWeapon;
+
 };

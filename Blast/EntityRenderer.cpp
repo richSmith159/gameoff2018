@@ -138,6 +138,17 @@ void EntityRenderer::render(EnemySquare * enemy) {
 	);
 }
 
+void EntityRenderer::render(Bullet * bullet) {
+	m_spriteBatch.draw(
+		bullet->calculateDestRect(),
+		bullet->getUVRect(),
+		bullet->getTextureId(),
+		1.0f,
+		bullet->getColor(),
+		bullet->getDirection()
+	);
+}
+
 void EntityRenderer::end() {
 	m_spriteBatch.end();
 	m_spriteBatch.renderBatch();
