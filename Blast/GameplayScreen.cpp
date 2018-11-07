@@ -63,7 +63,7 @@ void GameplayScreen::onEntry() {
 	m_squareSpawner.init(0.1f, 10.0f, 0.1f, &m_player, m_world.get());
 	m_testWeapon.init(
 		"test",
-		0.025f,
+		8.0f,
 		100.0f,
 		1,
 		1.0f,
