@@ -15,6 +15,7 @@ public:
 	~Weapon();
 
 	void init(
+		b2World* physicsWorld,
 		const std::string& name,
 		const int& fireRate,
 		const float& range,
@@ -53,5 +54,5 @@ private:
 	float m_bulletWidth;
 	float m_bulletHeight;
 	Tempest::glTexture m_bulletTexture;
-	
+	b2World* m_world = nullptr;
 };

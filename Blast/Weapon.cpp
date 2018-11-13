@@ -11,7 +11,18 @@ Weapon::~Weapon() {
 	// empty
 }
 
-void Weapon::init(const std::string & name, const int & fireRate, const float & range, const int & bulletsPerShot, const float & bulletSpeed, const float & bulletDamage, const float & bulletWidth, const float & bulletHeight, const Tempest::glTexture & bulletTexture) {
+void Weapon::init(
+	b2World* physicsWorld,
+	const std::string & name,
+	const int & fireRate,
+	const float & range,
+	const int & bulletsPerShot,
+	const float & bulletSpeed,
+	const float & bulletDamage,
+	const float & bulletWidth,
+	const float & bulletHeight,
+	const Tempest::glTexture & bulletTexture
+) {
 
 	// weapon properties
 	m_fireRate = fireRate;
@@ -26,7 +37,10 @@ void Weapon::init(const std::string & name, const int & fireRate, const float & 
 	m_bulletWidth = bulletWidth;
 	m_bulletHeight = bulletHeight;
 	m_bulletTexture = bulletTexture;
-
+	
+	// physics
+	m_world = physicsWorld;
+	
 }
 
 void Weapon::update(bool mouseDown, const glm::vec2 & position, const glm::vec2 & direction, float deltaTime) {
@@ -38,10 +52,11 @@ void Weapon::update(bool mouseDown, const glm::vec2 & position, const glm::vec2 
 }
 
 void Weapon::fire(const glm::vec2 & direction, const glm::vec2 & position) {
-	std::cout << "FIRE " << m_bulletsPerShot << std::endl;
+
 	for (int i = 0; i < m_bulletsPerShot; i++) {
 		m_bullets.emplace_back(
-			position - glm::vec2(m_bulletWidth/2.0f, m_bulletHeight / 2.0f),
+			m_world,
+			position - glm::vec2(m_bulletWidth / 2.0f, m_bulletHeight / 2.0f),
 			direction,
 			m_bulletTexture,
 			m_bulletWidth,

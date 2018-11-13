@@ -43,7 +43,10 @@ void EnemySquare::init(glm::vec2 position, float health, float speed, Player * p
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = &squareShape;
 	m_fixtures[0] = m_body->CreateFixture(&fixtureDef);
-	
+
+	m_collisionObjectType = COLLISION_OBJECT_TYPE::ENEMY;
+
+
 }
 
 void EnemySquare::update(float deltaTime) {

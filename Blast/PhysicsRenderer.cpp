@@ -84,60 +84,61 @@ void PhysicsRenderer::begin(Tempest::Camera2D * activeCamera) {
 	glUniformMatrix4fv(pUniform, 1, GL_FALSE, &projectionMatrix[0][0]);
 }
 
-void PhysicsRenderer::drawSquare(b2Body * body, Tempest::ColorRGBA8 color) {
-	int startIndex = m_verts.size();
-	m_verts.resize(m_verts.size() + 4);
-	b2Fixture fixture = body->GetFixtureList()[0];
-	b2PolygonShape* shape = (b2PolygonShape*)fixture.GetShape();
-	for (int i = 0; i < 4; i++) {
-		b2Vec2 worldVertPos = body->GetWorldPoint(shape->m_vertices[i]);
-		m_verts[startIndex + i].position.x = worldVertPos.x;
-		m_verts[startIndex + i].position.y = worldVertPos.y;
-		m_verts[startIndex + i].color = color;
+void PhysicsRenderer::drawEnemySquare(EnemySquare* square, Tempest::ColorRGBA8 color) {
+	b2Body* squareBody = square->getBody();
+	drawSquareFromFixture(&squareBody->GetFixtureList()[0], squareBody, color);
+}
+
+void PhysicsRenderer::drawCircle(const glm::vec2 & center, const Tempest::ColorRGBA8 & color, float radius) {
+
+	static const int NUM_VERTS = 100;
+	// Set up vertices
+	int start = m_verts.size();
+	m_verts.resize(m_verts.size() + NUM_VERTS);
+	for (int i = 0; i < NUM_VERTS; i++) {
+		float angle = ((float)i / NUM_VERTS) * PI * 2.0f;
+		m_verts[start + i].position.x = cos(angle) * radius + center.x;
+		m_verts[start + i].position.y = sin(angle) * radius + center.y;
+		m_verts[start + i].color = color;
 	}
 
-	m_indices.reserve(m_indices.size() + 8);
-	m_indices.push_back(startIndex);
-	m_indices.push_back(startIndex + 1);
-
-	m_indices.push_back(startIndex + 1);
-	m_indices.push_back(startIndex + 2);
-
-	m_indices.push_back(startIndex + 2);
-	m_indices.push_back(startIndex + 3);
-
-	m_indices.push_back(startIndex + 3);
-	m_indices.push_back(startIndex);
-
+	m_indices.reserve(m_indices.size() + NUM_VERTS * 2);
+	for (int i = 0; i < NUM_VERTS - 1; i++) {
+		m_indices.push_back(start + i);
+		m_indices.push_back(start + i + 1);
+	}
+	m_indices.push_back(start + NUM_VERTS - 1);
+	m_indices.push_back(start);
 
 }
 
-void PhysicsRenderer::draw(b2Body * body, Tempest::ColorRGBA8 color) {
-	
-	for (b2Fixture* fixture = body->GetFixtureList(); fixture; fixture = fixture->GetNext()) {
-		int startIndex = m_verts.size();
-		switch (fixture->GetType()) {
-		default:
-			b2PolygonShape* shape = (b2PolygonShape*)fixture->GetShape();
-			int numberOfVerts = shape->m_vertices->Length();
-			m_verts.resize(startIndex + numberOfVerts);
-			for (unsigned int i = 0; i < numberOfVerts; i++) {
-				b2Vec2 worldVertPos = body->GetWorldPoint(shape->m_vertices[i]);
-				m_verts[startIndex + i].position.x = worldVertPos.x;
-				m_verts[startIndex + i].position.y = worldVertPos.y;
-				m_verts[startIndex + i].color = color;
-			}
+void PhysicsRenderer::drawBulletCapsule(Bullet * bullet, Tempest::ColorRGBA8 color) {
+	drawCapsule(
+		bullet->getBody(),
+		color,
+		bullet->getHeight() - bullet->getWidth(),
+		bullet->getWidth() * 0.5f,
+		bullet->getCenterPosition()
+	);
+}
 
-			m_indices.reserve(m_indices.size() + numberOfVerts * 2);
-			for (unsigned int i = 0; i < numberOfVerts - 1; i++) {
-				m_indices.push_back(startIndex + i);
-				m_indices.push_back(startIndex + i + 1);
-			}
-			m_indices.push_back(startIndex + numberOfVerts - 1);
-			m_indices.push_back(startIndex);
-			break;
-		}
-	}
+void PhysicsRenderer::drawCapsule(b2Body * body, Tempest::ColorRGBA8 color, float rectHeight, float radius, glm::vec2 centerPosition) {
+
+	// get fixture
+	// b2Fixture topCircleFixture = body->GetFixtureList()[2];
+	// b2Fixture bottomCircleFixture = body->GetFixtureList()[1];
+	b2Fixture rectFixture = body->GetFixtureList()[0];
+
+	// calculate centers
+	// glm::vec2 topCircleCenter = glm::vec2(centerPosition.x, centerPosition.y + rectHeight);
+	// glm::vec2 bottomCircleCenter = glm::vec2(centerPosition.x, centerPosition.y - rectHeight);
+
+	// draw circles
+	// drawCircle(topCircleCenter, color, radius);
+	// drawCircle(bottomCircleCenter, color, radius);
+	
+	drawSquareFromFixture(&rectFixture, body, color);
+	
 }
 
 void PhysicsRenderer::render() {
@@ -171,4 +172,29 @@ void PhysicsRenderer::dispose() {
 	if (m_vbo) { glDeleteBuffers(1, &m_vbo); }
 	if (m_ibo) { glDeleteBuffers(1, &m_ibo); }
 	m_program.dispose();
+}
+
+void PhysicsRenderer::drawSquareFromFixture(b2Fixture * fixture, b2Body* body, Tempest::ColorRGBA8 color) {
+	b2PolygonShape* shape = (b2PolygonShape*)fixture->GetShape();
+	int startIndex = m_verts.size();
+	m_verts.resize(m_verts.size() + 4);
+	for (int i = 0; i < 4; i++) {
+		b2Vec2 worldVertPos = body->GetWorldPoint(shape->m_vertices[i]);
+		m_verts[startIndex + i].position.x = worldVertPos.x;
+		m_verts[startIndex + i].position.y = worldVertPos.y;
+		m_verts[startIndex + i].color = color;
+	}
+
+	m_indices.reserve(m_indices.size() + 8);
+	m_indices.push_back(startIndex);
+	m_indices.push_back(startIndex + 1);
+
+	m_indices.push_back(startIndex + 1);
+	m_indices.push_back(startIndex + 2);
+
+	m_indices.push_back(startIndex + 2);
+	m_indices.push_back(startIndex + 3);
+
+	m_indices.push_back(startIndex + 3);
+	m_indices.push_back(startIndex);
 }

@@ -5,6 +5,9 @@
 #include <Box2D\Box2D.h>
 #include <glm\glm\glm.hpp>
 
+
+enum class COLLISION_OBJECT_TYPE {BULLET, ENEMY, PLAYER};
+
 class Entity
 {
 public:
@@ -19,6 +22,10 @@ public:
 	Tempest::ColorRGBA8 getColor() { return m_color; }
 	glm::vec2 getCenterPosition();
 	b2Body* getBody() { return m_body; }
+	b2Fixture* getFixture(const int& index) { return m_fixtures[index]; }
+	float getWidth() { return m_width; }
+	float getHeight() { return m_height; }
+	COLLISION_OBJECT_TYPE getCollisionObjectType() { return m_collisionObjectType; }
 
 	// setters
 	void setPosition(const glm::vec2& newPosition) { m_position = newPosition; }
@@ -27,7 +34,6 @@ public:
 
 	// calculations
 	glm::vec4 calculateDestRect() { return glm::vec4(m_position.x, m_position.y, m_width, m_height); }
-
 
 protected:
 
@@ -44,6 +50,7 @@ protected:
 
 	b2Body* m_body = nullptr;
 	b2Fixture* m_fixtures[3];
+	COLLISION_OBJECT_TYPE m_collisionObjectType;
 
 };
 

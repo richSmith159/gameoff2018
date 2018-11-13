@@ -5,6 +5,7 @@
 #include "EnemySquare.h"
 #include "Spawner.h"
 #include "Weapon.h"
+#include "CollisionManager.h"
 
 #include <Tempest\Window.h>
 #include <Tempest\IGameScreen.h>
@@ -47,6 +48,9 @@ private:
 
 	std::unique_ptr<b2World> m_world;
 
-	Weapon m_testWeapon;
+	Weapon m_weaponLeft;
+	Weapon m_weaponRight;
+
+	CollisionManager m_collisionManager;
 
 };

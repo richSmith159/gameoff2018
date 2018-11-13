@@ -7,6 +7,7 @@
 #include <SDL\SDL.h>
 #include <string>
 #include <iostream>
+#include <glm\glm\gtx\rotate_vector.hpp>
 
 
 GameplayScreen::GameplayScreen(Tempest::Window* window) { m_window = window; }
@@ -61,17 +62,21 @@ void GameplayScreen::onEntry() {
 	m_player.setPosition(glm::vec2(0.0f, 0.0f));
 
 	m_squareSpawner.init(0.1f, 10.0f, 0.1f, &m_player, m_world.get());
-	m_testWeapon.init(
-		"test",
-		8.0f,
-		100.0f,
+	m_weaponLeft.init(
+		m_world.get(),
+		"left",
+		10.0f,
+		400.0f,
 		1,
 		1.0f,
-		1.0f,
+		10.0f,
 		20.0f,
 		8.0f,
 		Tempest::ResourceManager::getTexture("Assets/Textures/Entities/yellow_laser.png")
 	);
+
+	m_world->SetContactListener(&m_collisionManager);
+	
 }
 
 
@@ -86,18 +91,42 @@ void GameplayScreen::update(float deltaTime) {
 	m_player.update(deltaTime);
 	for (unsigned int i = 0; i < m_squareSpawner.m_entities.size(); i++) {
 		m_squareSpawner.m_entities[i].update(deltaTime);
+		if (m_squareSpawner.m_entities[i].isDestroyed()) {
+			m_squareSpawner.m_entities[i] = m_squareSpawner.m_entities.back();
+			m_squareSpawner.m_entities.pop_back();
+		}
 	}
 
 	if (m_game->inputManager.isKeyDown(SDLK_p)) { m_renderDebug = !m_renderDebug; }
-	m_testWeapon.update(
-		m_game->inputManager.isKeyDown(SDL_BUTTON_LEFT),
-		m_player.getCenterPosition(),
-		m_player.getDirection(),
-		deltaTime
-	);
 
-	for (unsigned int i = 0; i < m_testWeapon.m_bullets.size(); i++) {
-		m_testWeapon.m_bullets[i].update(deltaTime);
+	if (m_game->inputManager.isKeyDown(SDL_BUTTON_LEFT)) {
+		glm::vec2 playerDirection = m_player.getDirection();
+		glm::vec2 playerCenterPosition = m_player.getCenterPosition();
+		m_weaponLeft.update(
+			true,
+			playerCenterPosition,
+			playerDirection,
+			deltaTime
+		);
+	}
+	for (unsigned int i = 0; i < m_weaponLeft.m_bullets.size(); i++) {
+		m_weaponLeft.m_bullets[i].update(deltaTime);
+		std::cout << std::boolalpha << m_weaponLeft.m_bullets[i].getCollided() << std::endl;
+		/*
+		if (m_weaponLeft.m_bullets[i].getCollided()) {
+			m_weaponLeft.m_bullets[i] = m_weaponLeft.m_bullets.back();
+			m_weaponLeft.m_bullets.pop_back();
+		}
+		*/
+		
+	}
+	for (unsigned int i = 0; i < m_weaponLeft.m_bullets.size(); i++) {
+		/*
+		if (m_weaponLeft.m_bullets[i].outOfRange()) {
+			m_weaponLeft.m_bullets[i] = m_weaponLeft.m_bullets.back();
+			m_weaponLeft.m_bullets.pop_back();
+		}
+		*/
 	}
 	checkInput();
 }
@@ -107,12 +136,15 @@ void GameplayScreen::draw() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	m_entityRenderer.begin(&m_camera);
+
 	for (unsigned int i = 0; i < m_squareSpawner.m_entities.size(); i++) {
 		m_entityRenderer.render(&m_squareSpawner.m_entities[i]);
 	}
-
-	for (unsigned int i = 0; i < m_testWeapon.m_bullets.size(); i++) {
-		m_entityRenderer.render(&m_testWeapon.m_bullets[i]);
+	for (unsigned int i = 0; i < m_weaponLeft.m_bullets.size(); i++) {
+		m_entityRenderer.render(&m_weaponLeft.m_bullets[i]);
+	}
+	for (unsigned int i = 0; i < m_weaponRight.m_bullets.size(); i++) {
+		m_entityRenderer.render(&m_weaponRight.m_bullets[i]);
 	}
 	m_entityRenderer.render(&m_player);
 	m_entityRenderer.end();
@@ -121,7 +153,10 @@ void GameplayScreen::draw() {
 		Tempest::ColorRGBA8 debugColor = Tempest::ColorRGBA8(255, 0, 0, 255);
 		m_physicsRenderer.begin(&m_camera);
 		for (unsigned int i = 0; i < m_squareSpawner.m_entities.size(); i++) {	
-			m_physicsRenderer.drawSquare(m_squareSpawner.m_entities[i].getBody(), debugColor);
+			m_physicsRenderer.drawEnemySquare(&m_squareSpawner.m_entities[i], debugColor);
+		}
+		for (unsigned int i = 0; i < m_weaponLeft.m_bullets.size(); i++) {
+			m_physicsRenderer.drawBulletCapsule(&m_weaponLeft.m_bullets[i], debugColor);
 		}
 		m_physicsRenderer.render();
 		m_physicsRenderer.end();
