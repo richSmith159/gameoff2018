@@ -31,10 +31,11 @@ void EnemySquare::init(glm::vec2 position, float health, float speed, Player * p
 
 	// init physics body
 	b2BodyDef bodyDef;
-	bodyDef.type = b2_staticBody;
+	bodyDef.type = b2_dynamicBody;
 	bodyDef.position.Set(m_position.x, m_position.y);
 	bodyDef.fixedRotation = false;
 	bodyDef.angle = 0;
+	bodyDef.userData = this;
 	m_body = physicsWorld->CreateBody(&bodyDef);
 
 	// init physics fixtures
@@ -45,7 +46,6 @@ void EnemySquare::init(glm::vec2 position, float health, float speed, Player * p
 	m_fixtures[0] = m_body->CreateFixture(&fixtureDef);
 
 	m_collisionObjectType = COLLISION_OBJECT_TYPE::ENEMY;
-
 
 }
 

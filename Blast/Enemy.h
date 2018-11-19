@@ -21,6 +21,7 @@ public:
 	void setHealth(const float& newHealth) { m_health = newHealth; }
 	void setSpeed(const float& newSpeed) { m_speed = newSpeed; }
 
+	// calculations
 	void applyDamage(float damage) { m_health -= damage; }
 	bool isDestroyed() { return m_health <= 0; }
 

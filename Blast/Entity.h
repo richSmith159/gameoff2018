@@ -12,19 +12,18 @@ class Entity
 {
 public:
 	Entity();
-	~Entity();
+	virtual ~Entity();
 
 	// getters
-	glm::vec2 getPosition() { return m_position; }
-	glm::vec2 getDirection() { return m_direction; }
 	int getTextureId() { return m_texture.id; }
-	glm::vec4 getUVRect() { return m_uvRect; }
-	Tempest::ColorRGBA8 getColor() { return m_color; }
-	glm::vec2 getCenterPosition();
-	b2Body* getBody() { return m_body; }
-	b2Fixture* getFixture(const int& index) { return m_fixtures[index]; }
 	float getWidth() { return m_width; }
 	float getHeight() { return m_height; }
+	glm::vec4 getUVRect() { return m_uvRect; }
+	glm::vec2 getPosition() { return m_position; }
+	glm::vec2 getDirection() { return m_direction; }
+	Tempest::ColorRGBA8 getColor() { return m_color; }
+	b2Body* getBody() { return m_body; }
+	b2Fixture* getFixture(const int& index) { return m_fixtures[index]; }
 	COLLISION_OBJECT_TYPE getCollisionObjectType() { return m_collisionObjectType; }
 
 	// setters
@@ -33,6 +32,7 @@ public:
 	void setTexture(Tempest::glTexture newTexture) { m_texture = newTexture; }
 
 	// calculations
+	glm::vec2 getCenterPosition();
 	glm::vec4 calculateDestRect() { return glm::vec4(m_position.x, m_position.y, m_width, m_height); }
 
 protected:

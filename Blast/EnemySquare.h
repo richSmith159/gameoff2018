@@ -15,5 +15,5 @@ public:
 
 	void init(glm::vec2 position, float health, float speed, Player* player, b2World* physicsWorld) override;
 	void update(float deltaTime) override;
-	
+
 };

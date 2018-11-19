@@ -5,6 +5,7 @@
 
 #include <glm\glm\glm.hpp>
 
+
 class Bullet : public Entity
 {
 public:
@@ -23,7 +24,7 @@ public:
 
 	void update(float deltaTime);
 	
-	// gettters
+	// getters
 	float getSpeed() { return m_speed; }
 	float getDamage() { return m_damage; }
 	bool getCollided() { return m_collided; }
@@ -40,4 +41,5 @@ private:
 	float m_damage;
 	bool m_collided = false;
 	glm::vec2 m_startPosition;
+
 };

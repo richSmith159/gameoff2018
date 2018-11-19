@@ -27,7 +27,7 @@ Bullet::Bullet(
 
 	// Make the body
 	b2BodyDef bodyDef;
-	bodyDef.type = b2_staticBody;
+	bodyDef.type = b2_dynamicBody;
 	bodyDef.position.Set(m_position.x, m_position.y);
 	bodyDef.fixedRotation = true;
 	bodyDef.angle = 0;
@@ -43,7 +43,9 @@ Bullet::Bullet(
 	m_fixtures[0] = m_body->CreateFixture(&boxDef);
 
 	m_collided = false;
-	
+
+	m_collisionObjectType = COLLISION_OBJECT_TYPE::BULLET;
+
 }
 
 

@@ -39,6 +39,8 @@ void GameplayScreen::onEntry() {
 	// init simple physics
 	const b2Vec2 gravity(0.0f, 0.0f);
 	m_world = std::make_unique<b2World>(gravity);
+	m_world->SetContactListener(&m_collisionManager);
+
 	
 	// init camera
 	m_camera.init(m_window->getScreenWidth(), m_window->getScreenHeight());
@@ -75,8 +77,6 @@ void GameplayScreen::onEntry() {
 		Tempest::ResourceManager::getTexture("Assets/Textures/Entities/yellow_laser.png")
 	);
 
-	m_world->SetContactListener(&m_collisionManager);
-	
 }
 
 
@@ -111,14 +111,10 @@ void GameplayScreen::update(float deltaTime) {
 	}
 	for (unsigned int i = 0; i < m_weaponLeft.m_bullets.size(); i++) {
 		m_weaponLeft.m_bullets[i].update(deltaTime);
-		std::cout << std::boolalpha << m_weaponLeft.m_bullets[i].getCollided() << std::endl;
-		/*
 		if (m_weaponLeft.m_bullets[i].getCollided()) {
 			m_weaponLeft.m_bullets[i] = m_weaponLeft.m_bullets.back();
 			m_weaponLeft.m_bullets.pop_back();
 		}
-		*/
-		
 	}
 	for (unsigned int i = 0; i < m_weaponLeft.m_bullets.size(); i++) {
 		/*
@@ -129,6 +125,7 @@ void GameplayScreen::update(float deltaTime) {
 		*/
 	}
 	checkInput();
+	m_world->Step(1.0f / 60.0f, 6, 2);
 }
 
 

@@ -52,20 +52,22 @@ void Spawner<T>::spawn(
 
 template <class T>
 void Spawner<T>::update() {
-	std::random_device rd;
-	std::mt19937 randGenerator(rd());
-	std::uniform_real_distribution<float> randomNumber(0.0f, 1.0f);
-	if (randomNumber(randGenerator) < m_spawnRate) {
-		std::uniform_real_distribution<float> positionDistribution(-200.0f, 200.0f);
-		spawn(
-			glm::vec2(
-				positionDistribution(randGenerator),
-				positionDistribution(randGenerator)
-			),
-			m_spawnHealth,
-			m_spawnSpeed,
-			m_playerHandle,
-			m_world
-		);
+	if (m_entities.size() <= 0) {
+		std::random_device rd;
+		std::mt19937 randGenerator(rd());
+		std::uniform_real_distribution<float> randomNumber(0.0f, 1.0f);
+		if (randomNumber(randGenerator) < m_spawnRate) {
+			std::uniform_real_distribution<float> positionDistribution(-200.0f, 200.0f);
+			spawn(
+				glm::vec2(
+					positionDistribution(randGenerator),
+					positionDistribution(randGenerator)
+				),
+				m_spawnHealth,
+				m_spawnSpeed,
+				m_playerHandle,
+				m_world
+			);
+		}
 	}
 }
