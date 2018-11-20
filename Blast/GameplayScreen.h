@@ -6,6 +6,7 @@
 #include "Spawner.h"
 #include "Weapon.h"
 #include "CollisionManager.h"
+#include "Boundary.h"
 
 #include <Tempest\Window.h>
 #include <Tempest\IGameScreen.h>
@@ -52,5 +53,6 @@ private:
 	Weapon m_weaponRight;
 
 	CollisionManager m_collisionManager;
+	Boundary m_boundary;
 
 };

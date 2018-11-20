@@ -3,6 +3,7 @@
 #include "Entity.h"
 #include "EnemySquare.h"
 #include "Player.h"
+#include "Boundary.h"
 
 #include <Tempest\Camera2D.h>
 #include <Tempest\GLSLProgram.h>
@@ -22,6 +23,7 @@ public:
 	void render(Player* player);
 	void render(EnemySquare* enemy);
 	void render(Bullet* bullet);
+	void render(Boundary* boundary);
 	void end();
 
 private:

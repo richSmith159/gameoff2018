@@ -61,7 +61,7 @@ void GameplayScreen::onEntry() {
 		&m_camera,
 		0
 	);
-	m_player.setPosition(glm::vec2(0.0f, 0.0f));
+	m_player.setPosition(glm::vec2(-8.0f, -8.0f));
 
 	m_squareSpawner.init(0.1f, 10.0f, 0.1f, &m_player, m_world.get());
 	m_weaponLeft.init(
@@ -77,6 +77,8 @@ void GameplayScreen::onEntry() {
 		Tempest::ResourceManager::getTexture("Assets/Textures/Entities/yellow_laser.png")
 	);
 
+	m_boundary.init(glm::vec2(-150.0f, -150.0f), 300.0f, 0.05f, Tempest::ResourceManager::getTexture("Assets/Textures/circle_large.png"));
+
 }
 
 
@@ -89,6 +91,7 @@ void GameplayScreen::update(float deltaTime) {
 	m_camera.update();
 	m_squareSpawner.update();
 	m_player.update(deltaTime);
+	m_boundary.update(deltaTime);
 	for (unsigned int i = 0; i < m_squareSpawner.m_entities.size(); i++) {
 		m_squareSpawner.m_entities[i].update(deltaTime);
 		if (m_squareSpawner.m_entities[i].isDestroyed()) {
@@ -144,6 +147,7 @@ void GameplayScreen::draw() {
 		m_entityRenderer.render(&m_weaponRight.m_bullets[i]);
 	}
 	m_entityRenderer.render(&m_player);
+	m_entityRenderer.render(&m_boundary);
 	m_entityRenderer.end();
 
 	if (m_renderDebug) {

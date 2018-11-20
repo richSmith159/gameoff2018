@@ -149,6 +149,17 @@ void EntityRenderer::render(Bullet * bullet) {
 	);
 }
 
+void EntityRenderer::render(Boundary * boundary) {
+	m_spriteBatch.draw(
+		boundary->calculateDestRect(),
+		boundary->getUVRect(),
+		boundary->getTextureId(),
+		1.0f,
+		boundary->getColor(),
+		glm::vec2(0.0f, 0.0f)
+	);
+}
+
 void EntityRenderer::end() {
 	m_spriteBatch.end();
 	m_spriteBatch.renderBatch();
