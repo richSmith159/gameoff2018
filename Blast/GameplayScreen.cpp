@@ -92,6 +92,9 @@ void GameplayScreen::update(float deltaTime) {
 	m_squareSpawner.update();
 	m_player.update(deltaTime);
 	m_boundary.update(deltaTime);
+	if (m_boundary.isWithinBoundary(m_player.getCenterPosition())) {
+		std::cout << "OUT" << std::endl;
+	}
 	for (unsigned int i = 0; i < m_squareSpawner.m_entities.size(); i++) {
 		m_squareSpawner.m_entities[i].update(deltaTime);
 		if (m_squareSpawner.m_entities[i].isDestroyed()) {
