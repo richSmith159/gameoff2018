@@ -11,7 +11,7 @@
 template <class T>
 class Spawner {
 public:
-	void init(float spawnRate, float spawnHealth, float spawnSpeed, Player* player, b2World* physicsWorld);
+	void init(float spawnRate, float spawnHealth, float spawnSpeed, float range, Player* player, b2World* physicsWorld);
 	void update();
 	void spawn(
 		glm::vec2 position,
@@ -24,17 +24,19 @@ public:
 	float m_spawnRate;
 	float m_spawnHealth;
 	float m_spawnSpeed;
+	float m_range;
 	Player* m_playerHandle;
 	b2World* m_world;
 };
 
 template <class T>
-void Spawner<T>::init(float spawnRate, float spawnHealth, float spawnSpeed, Player* player, b2World* physicsWorld) {
+void Spawner<T>::init(float spawnRate, float spawnHealth, float spawnSpeed, float range, Player* player, b2World* physicsWorld) {
 	m_spawnRate = spawnRate;
 	m_spawnHealth = spawnHealth;
 	m_spawnSpeed = spawnSpeed;
 	m_playerHandle = player;
 	m_world = physicsWorld;
+	m_range = range;
 }
 
 template <class T>
@@ -58,7 +60,7 @@ void Spawner<T>::update() {
 	std::uniform_real_distribution<float> randomAngle(0.0f, 10.0f);
 	if (randomNumber(randGenerator) < m_spawnRate) {
 		spawn(
-			glm::rotate(glm::vec2(0.0f, 1.0f), randomAngle(randGenerator)) * 250.0f,
+			glm::rotate(glm::vec2(0.0f, 1.0f), randomAngle(randGenerator)) * m_range,
 			m_spawnHealth,
 			m_spawnSpeed,
 			m_playerHandle,

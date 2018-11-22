@@ -32,11 +32,12 @@ namespace Tempest {
 		// getters
 		glm::vec2 getMouseCoords() const { return m_mouseCoords; }
 		glm::vec2 getPreviousMouseCoords() const { return m_previousMouseCoords; }
+		
+		// function to check if key was down last frame
+		bool wasKeyDown(unsigned int keyID);
+
 
 	private:
-
-		// private function to check if key was down last frame
-		bool wasKeyDown(unsigned int keyID);
 
 		// map to store bool values keeping track of which keys are pressed
 		// map used as this will be dynamically resized

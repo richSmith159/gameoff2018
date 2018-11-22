@@ -59,11 +59,12 @@ void GameplayScreen::onEntry() {
 		0.5f,
 		&m_game->inputManager,
 		&m_camera,
-		0
+		0,
+		3
 	);
 	m_player.setPosition(glm::vec2(-8.0f, -8.0f));
 
-	m_squareSpawner.init(0.1f, 10.0f, 0.1f, &m_player, m_world.get());
+	m_squareSpawner.init(0.1f, 10.0f, 0.1f, 250.0f, &m_player, m_world.get());
 	m_weaponLeft.init(
 		m_world.get(),
 		"left",
@@ -90,7 +91,7 @@ void GameplayScreen::onExit() {
 void GameplayScreen::update(float deltaTime) {
 	m_camera.update();
 	m_squareSpawner.update();
-	m_player.update(deltaTime);
+	m_player.update(deltaTime, &m_boundary);
 	m_boundary.update(deltaTime);
 	if (m_boundary.isWithinBoundary(m_player.getCenterPosition())) {
 		std::cout << "OUT" << std::endl;
