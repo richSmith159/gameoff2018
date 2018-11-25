@@ -6,7 +6,7 @@
 #include <glm\glm\glm.hpp>
 
 
-enum class COLLISION_OBJECT_TYPE {BULLET, ENEMY, PLAYER};
+enum class COLLISION_OBJECT_TYPE {BULLET = 1, ENEMY = 2, PLAYER = 3};
 
 class Entity
 {
@@ -15,10 +15,10 @@ public:
 	virtual ~Entity();
 
 	// getters
-	int getTextureId() { return m_texture.id; }
 	float getWidth() { return m_width; }
 	float getHeight() { return m_height; }
 	glm::vec4 getUVRect() { return m_uvRect; }
+	int getTextureId() { return m_texture.id; }
 	glm::vec2 getPosition() { return m_position; }
 	glm::vec2 getDirection() { return m_direction; }
 	Tempest::ColorRGBA8 getColor() { return m_color; }
@@ -33,7 +33,7 @@ public:
 
 	// calculations
 	glm::vec2 getCenterPosition();
-	glm::vec4 calculateDestRect() { return glm::vec4(m_position.x, m_position.y, m_width, m_height); }
+	glm::vec4 calculateDestRect();
 
 protected:
 
@@ -53,4 +53,3 @@ protected:
 	COLLISION_OBJECT_TYPE m_collisionObjectType;
 
 };
-

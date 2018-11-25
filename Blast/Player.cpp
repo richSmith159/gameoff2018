@@ -59,6 +59,7 @@ void Player::update(float deltaTime, Boundary* boundary) {
 
 	if (m_inputManager->isKeyDown(SDLK_b)) {
 		if (m_remainingAbilities > 0) {
+			// TODO: mark for resize - update in boundary to perform animation transition
 			boundary->resize(glm::vec2(100.0f, 100.0f));
 			m_remainingAbilities -= 1;
 		}

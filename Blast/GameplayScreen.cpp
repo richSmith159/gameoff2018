@@ -64,14 +64,14 @@ void GameplayScreen::onEntry() {
 	);
 	m_player.setPosition(glm::vec2(-8.0f, -8.0f));
 
-	m_squareSpawner.init(0.1f, 10.0f, 0.1f, 250.0f, &m_player, m_world.get());
+	m_squareSpawner.init(0.01f, 10.0f, 10.0f, 250.0f, &m_player, m_world.get());
 	m_weaponLeft.init(
 		m_world.get(),
 		"left",
 		10.0f,
 		400.0f,
 		1,
-		1.0f,
+		100.0f,
 		10.0f,
 		20.0f,
 		8.0f,

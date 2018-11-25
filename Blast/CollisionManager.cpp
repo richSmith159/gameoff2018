@@ -16,36 +16,28 @@ void CollisionManager::BeginContact(b2Contact * contact) {
 	void* fixtureABodyData = contact->GetFixtureA()->GetBody()->GetUserData();
 	void* fixtureBBodyData = contact->GetFixtureB()->GetBody()->GetUserData();
 	if (fixtureABodyData && fixtureBBodyData) {
-		Entity* fixtureAData = static_cast<Entity*>(fixtureABodyData);
-		Entity* fixtureBData = static_cast<Entity*>(fixtureBBodyData);
-		if (fixtureAData->getCollisionObjectType() == COLLISION_OBJECT_TYPE::BULLET) {
-			std::cout << "A BULLET" << std::endl;
-		}
-		if (fixtureBData->getCollisionObjectType() == COLLISION_OBJECT_TYPE::BULLET) {
-			std::cout << "B BULLET" << std::endl;
-		}
-		if (fixtureAData->getCollisionObjectType() == COLLISION_OBJECT_TYPE::ENEMY) {
-			std::cout << "A ENEMY" << std::endl;
-		}
-		if (fixtureBData->getCollisionObjectType() == COLLISION_OBJECT_TYPE::ENEMY) {
-			std::cout << "B ENEMY" << std::endl;
-		}
-		std::cout << "----------------------" << std::endl;
-		/*
+		Entity* fixtureAEntity = reinterpret_cast<Entity*>(fixtureABodyData);
+		Entity* fixtureBEntity = reinterpret_cast<Entity*>(fixtureBBodyData);
+		std::cout << "A: " << static_cast<std::underlying_type<COLLISION_OBJECT_TYPE>::type>(fixtureAEntity->getCollisionObjectType()) << std::endl;
+		std::cout << "B: " << static_cast<std::underlying_type<COLLISION_OBJECT_TYPE>::type>(fixtureBEntity->getCollisionObjectType()) << std::endl;
+		if (fixtureAEntity->getCollisionObjectType() == COLLISION_OBJECT_TYPE::BULLET) { std::cout << "A BULLET" << std::endl; }
+		if (fixtureAEntity->getCollisionObjectType() == COLLISION_OBJECT_TYPE::ENEMY) { std::cout << "A ENEMY" << std::endl; }
+		if (fixtureBEntity->getCollisionObjectType() == COLLISION_OBJECT_TYPE::BULLET) { std::cout << "B BULLET" << std::endl; }
+		if (fixtureBEntity->getCollisionObjectType() == COLLISION_OBJECT_TYPE::ENEMY) { std::cout << "B ENEMY" << std::endl; }
 		if (
 			fixtureAEntity->getCollisionObjectType() == COLLISION_OBJECT_TYPE::BULLET &&
 			fixtureBEntity->getCollisionObjectType() == COLLISION_OBJECT_TYPE::ENEMY
-		) {
+			) {
 			handleBulletEnemyCollision(fixtureAEntity, fixtureBEntity);
 		}
 		else if (
 			fixtureAEntity->getCollisionObjectType() == COLLISION_OBJECT_TYPE::ENEMY &&
 			fixtureBEntity->getCollisionObjectType() == COLLISION_OBJECT_TYPE::BULLET
-		) {
+			) {
 			handleBulletEnemyCollision(fixtureBEntity, fixtureAEntity);
 		}
-		*/
 	}
+	std::cout << "----------------------" << std::endl;
 }
 
 void CollisionManager::EndContact(b2Contact* contact) {
