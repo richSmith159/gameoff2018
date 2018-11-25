@@ -33,7 +33,8 @@ void EnemySquare::init(glm::vec2 position, float health, float speed, Player * p
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position.Set(m_position.x, m_position.y);
 	bodyDef.angle = 0;
-	bodyDef.userData = (Entity*)this;
+	// bodyDef.userData = (Entity*)this;
+	bodyDef.userData = static_cast<Entity*>(this);
 	bodyDef.fixedRotation = false;
 	m_body = physicsWorld->CreateBody(&bodyDef);
 
