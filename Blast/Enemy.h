@@ -10,7 +10,7 @@ class Enemy : public Entity
 public:
 	Enemy();
 	virtual ~Enemy();
-	virtual void init(glm::vec2 position, float health, float speed, Player* player, b2World* physicsWorld) = 0;
+	// virtual void init(glm::vec2 position, float health, float speed, Player* player, b2World* physicsWorld) = 0;
 	virtual void update(float deltaTime) = 0;
 
 	// getters
@@ -30,5 +30,6 @@ protected:
 	float m_health;
 	float m_speed;
 	Player* m_playerTarget;
+	COLLISION_OBJECT_TYPE m_collisionObjectType = COLLISION_OBJECT_TYPE::ENEMY;
 	
 };

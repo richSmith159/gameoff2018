@@ -47,9 +47,12 @@ void Spawner<T>::spawn(
 	Player* player,
 	b2World* physicsWorld
 ) {
+	/*
 	T newEntity;
-	newEntity.init(position, health, speed, player, physicsWorld);
+	newEntity.emplace_back(position, health, speed, player, physicsWorld);
 	m_entities.push_back(newEntity);
+	*/
+	m_entities.emplace_back(position, health, speed, player, physicsWorld);
 }
 
 template <class T>

@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "PhysicsRenderer.h"
 #include "EnemySquare.h"
+#include "EnemyCircle.h"
 #include "Spawner.h"
 #include "Weapon.h"
 #include "CollisionManager.h"
@@ -46,6 +47,7 @@ private:
 	Player m_player;
 
 	Spawner<EnemySquare> m_squareSpawner;
+	Spawner<EnemyCircle> m_circleSpawner;
 
 	std::unique_ptr<b2World> m_world;
 

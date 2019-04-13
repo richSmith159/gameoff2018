@@ -65,6 +65,8 @@ void GameplayScreen::onEntry() {
 	m_player.setPosition(glm::vec2(-8.0f, -8.0f));
 
 	m_squareSpawner.init(0.01f, 10.0f, 10.0f, 250.0f, &m_player, m_world.get());
+	m_circleSpawner.init(0.01f, 10.0f, 10.0f, 250.0f, &m_player, m_world.get());
+
 	m_weaponLeft.init(
 		m_world.get(),
 		"left",
@@ -89,18 +91,36 @@ void GameplayScreen::onExit() {
 
 
 void GameplayScreen::update(float deltaTime) {
+	
 	m_camera.update();
+	
+	// update spawners to create new enemy instances
 	m_squareSpawner.update();
+	m_circleSpawner.update();
+
 	m_player.update(deltaTime, &m_boundary);
 	m_boundary.update(deltaTime);
+
+	// check player in boundary
 	if (m_boundary.isWithinBoundary(m_player.getCenterPosition())) {
 		std::cout << "OUT" << std::endl;
 	}
+
+	// update squares
 	for (unsigned int i = 0; i < m_squareSpawner.m_entities.size(); i++) {
 		m_squareSpawner.m_entities[i].update(deltaTime);
 		if (m_squareSpawner.m_entities[i].isDestroyed()) {
 			m_squareSpawner.m_entities[i] = m_squareSpawner.m_entities.back();
 			m_squareSpawner.m_entities.pop_back();
+		}
+	}
+
+	// update circles
+	for (unsigned int i = 0; i < m_circleSpawner.m_entities.size(); i++) {
+		m_circleSpawner.m_entities[i].update(deltaTime);
+		if (m_circleSpawner.m_entities[i].isDestroyed()) {
+			m_circleSpawner.m_entities[i] = m_circleSpawner.m_entities.back();
+			m_circleSpawner.m_entities.pop_back();
 		}
 	}
 
@@ -141,9 +161,17 @@ void GameplayScreen::draw() {
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	m_entityRenderer.begin(&m_camera);
 
+	// draw squares
 	for (unsigned int i = 0; i < m_squareSpawner.m_entities.size(); i++) {
 		m_entityRenderer.render(&m_squareSpawner.m_entities[i]);
 	}
+
+	// draw circles
+	for (unsigned int i = 0; i < m_circleSpawner.m_entities.size(); i++) {
+		m_entityRenderer.render(&m_circleSpawner.m_entities[i]);
+	}
+
+	// draw bullets
 	for (unsigned int i = 0; i < m_weaponLeft.m_bullets.size(); i++) {
 		m_entityRenderer.render(&m_weaponLeft.m_bullets[i]);
 	}

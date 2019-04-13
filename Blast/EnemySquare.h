@@ -10,10 +10,10 @@
 class EnemySquare : public Enemy
 {
 public:
-	EnemySquare();
+	EnemySquare(glm::vec2 position, float health, float speed, Player * player, b2World* physicsWorld);
 	~EnemySquare();
 
-	void init(glm::vec2 position, float health, float speed, Player* player, b2World* physicsWorld) override;
+	// void init(glm::vec2 position, float health, float speed, Player* player, b2World* physicsWorld) override;
 	void update(float deltaTime) override;
 
 };
