@@ -2,6 +2,8 @@
 #include "PhysicsComponent.h"
 #include <Box2D\Box2D.h>
 
+#include <iostream>
+
 
 
 SpriteComponent::SpriteComponent(Tempest::glTexture texture, Tempest::ColorRGBA8 color, float width, float height) {
@@ -25,7 +27,8 @@ void SpriteComponent::onRemove() {
 
 glm::vec4 SpriteComponent::calculateDestRect() {
 	if (m_entity != nullptr) {
-		if (m_entity->m_physicsComponent != nullptr && m_entity->m_transformComponent != nullptr) {
+		if (m_entity->m_physicsComponent != nullptr) {
+			std::cout << m_entity->m_physicsComponent->lol << std::endl;
 			b2Vec2 bodyPosition = m_entity->m_physicsComponent->m_body->GetPosition();
 			return glm::vec4(
 				bodyPosition.x - (m_width * 0.5),

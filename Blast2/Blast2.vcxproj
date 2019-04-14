@@ -128,11 +128,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Blast2Game.cpp" />
+    <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="GameEntity.cpp" />
     <ClCompile Include="GameScreen.cpp" />
     <ClCompile Include="IComponent.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PhysicsComponent.cpp" />
+    <ClCompile Include="PhysicsSystem.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="SpriteSystem.cpp" />
@@ -140,11 +142,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Blast2Game.h" />
+    <ClInclude Include="EntityManager.h" />
     <ClInclude Include="GameEntity.h" />
     <ClInclude Include="GameScreen.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="ISystem.h" />
     <ClInclude Include="PhysicsComponent.h" />
+    <ClInclude Include="PhysicsSystem.h" />
     <ClInclude Include="Screens.h" />
     <ClInclude Include="SpriteComponent.h" />
     <ClInclude Include="SpriteRenderer.h" />

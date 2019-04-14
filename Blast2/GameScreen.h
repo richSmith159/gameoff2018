@@ -1,6 +1,8 @@
 #pragma once
 
 #include "SpriteSystem.h"
+#include "PhysicsSystem.h"
+#include "EntityManager.h"
 
 #include <Tempest\Window.h>
 #include <Tempest\IGameScreen.h>
@@ -25,14 +27,18 @@ public:
 	virtual void draw() override;
 
 private:
-
 	void initUI();
 	void checkInput();
+	void spawnEnemy(const std::string& spriteTexturePath, glm::vec2 initialPosition, const float& width, const float& height);
 
 	Tempest::Window* m_window;
 	Tempest::GUI m_gui;
 	Tempest::Camera2D m_camera;
 
 	SpriteSystem m_spriteSystem;
+	PhysicsSystem m_physicsSystem;
+
+	EntityManager m_entityManager;
+	SpriteRenderer m_defaultRenderer;
 
 };

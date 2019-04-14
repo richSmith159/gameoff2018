@@ -13,7 +13,7 @@ public:
 	virtual void run(float deltaTime) override;
 	
 	void initSystem(Tempest::Camera2D* camera);
-	void addComponent(Tempest::glTexture texture, Tempest::ColorRGBA8 color, float width, float height);
+	SpriteComponent* addComponent(Tempest::glTexture texture, Tempest::ColorRGBA8 color, float width, float height);
 	void removeComponent();
 
 	inline void setRenderer(SpriteRenderer* renderer) { m_renderer = renderer; }

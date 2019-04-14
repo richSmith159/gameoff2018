@@ -20,4 +20,6 @@ public:
 	PhysicsComponent* m_physicsComponent = nullptr;
 	SpriteComponent* m_spriteComponent = nullptr;
 
+	int m_id;
+
 };

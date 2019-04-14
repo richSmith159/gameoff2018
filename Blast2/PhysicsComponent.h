@@ -5,8 +5,6 @@
 #include "IComponent.h"
 
 
-
-
 class PhysicsComponent : public IComponent
 {
 public:
@@ -20,5 +18,6 @@ public:
 	b2Fixture* m_fixtures[3];
 	b2World* m_physicsWorldHandle;
 
+	int lol = 123;
 };
 
