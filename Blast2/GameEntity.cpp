@@ -1,12 +1,18 @@
 #include "GameEntity.h"
 
+#include "PhysicsComponent.h"
+#include "SpriteSystem.h"
+#include "TransformComponent.h"
 
 
-GameEntity::GameEntity() {
+
+GameEntity::GameEntity(TransformComponent*, PhysicsComponent*, SpriteComponent*) {
 	// empty
 }
 
 
 GameEntity::~GameEntity() {
-	// empty
+	m_physicsComponent->enabled = false;
+	m_spriteComponent->enabled = false;
+	m_transformComponent->enabled = false;
 }

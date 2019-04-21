@@ -28,7 +28,6 @@ void SpriteComponent::onRemove() {
 glm::vec4 SpriteComponent::calculateDestRect() {
 	if (m_entity != nullptr) {
 		if (m_entity->m_physicsComponent != nullptr) {
-			std::cout << m_entity->m_physicsComponent->lol << std::endl;
 			b2Vec2 bodyPosition = m_entity->m_physicsComponent->m_body->GetPosition();
 			return glm::vec4(
 				bodyPosition.x - (m_width * 0.5),

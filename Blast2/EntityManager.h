@@ -18,7 +18,7 @@ private:
 	// rolling increment of number of entities used for entity ID
 	int m_entityCount;
 
-	std::map<int, GameEntity> m_entities;
+	std::map<int, GameEntity*> m_entities;
 
 };
 

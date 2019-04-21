@@ -120,6 +120,17 @@ void SpriteRenderer::render(SpriteComponent* component) {
 
 }
 
+void SpriteRenderer::renderByData(glm::vec4 destRect, glm::vec4 uvRect, int textureID, float depth, Tempest::ColorRGBA8 color, float angle) {
+	m_spriteBatch.draw(
+		destRect,
+		uvRect,
+		textureID,
+		depth,
+		color,
+		angle
+	);
+}
+
 void SpriteRenderer::end() {
 	m_spriteBatch.end();
 	m_spriteBatch.renderBatch();

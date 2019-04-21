@@ -53,7 +53,7 @@ void GameScreen::onEntry() {
 	m_spriteSystem.initSystem(&m_camera);
 
 	spawnEnemy("Assets/Textures/Entities/square.png", glm::vec2(0.0f), 16.0f, 16.0f);
-
+	std::cout << "AFTER ADD: " << m_entityManager.getEntity(0)->m_physicsComponent->lol << std::endl;
 }
 
 

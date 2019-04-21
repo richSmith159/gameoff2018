@@ -16,6 +16,7 @@ public:
 	void init();
 	void begin(Tempest::Camera2D* activeCamera);
 	void render(SpriteComponent* component);
+	void renderByData(glm::vec4 destRect, glm::vec4 uvRect, int textureID, float depth, Tempest::ColorRGBA8 color, float angle);
 	void end();
 
 private:

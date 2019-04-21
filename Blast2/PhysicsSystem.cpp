@@ -22,6 +22,7 @@ void PhysicsSystem::run(float deltaTime) {
 }
 
 PhysicsComponent* PhysicsSystem::addComponent(b2BodyType bodyType, float xPos, float yPos, float angle) {
-	m_components.emplace_back(bodyType, xPos, yPos, angle, m_world.get());
-	return &m_components.back();
+	PhysicsComponent* component = new PhysicsComponent(bodyType, xPos, yPos, angle, m_world.get());
+	m_components.push_back(component);
+	return component;
 }
