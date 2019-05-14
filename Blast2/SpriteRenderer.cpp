@@ -107,8 +107,6 @@ void SpriteRenderer::begin(Tempest::Camera2D * activeCamera) {
 }
 
 void SpriteRenderer::render(SpriteComponent* component) {
-	glm::vec4 dr = component->calculateDestRect();
-	std::cout << dr.x << "," << dr.y << "," << dr.z << "," << dr.w << std::endl;
 	m_spriteBatch.draw(
 		component->calculateDestRect(),
 		glm::vec4(0.0f, 0.0f, 1.0f, 1.0f),

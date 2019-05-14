@@ -14,7 +14,7 @@ public:
 
 	void initSystem(float gravityX, float gravityY);
 	virtual void run(float deltaTime) override;
-	PhysicsComponent* addComponent(b2BodyType bodyType, float xPos, float yPos, float angle);
+	PhysicsComponent* addComponent(b2BodyType bodyType, glm::vec2 boundingDims, float xPos, float yPos, float angle);
 
 
 private:

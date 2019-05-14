@@ -35,13 +35,12 @@ void GameScreen::destroy() {
 
 
 void GameScreen::onEntry() {
-	std::cout << "On Entry" << std::endl;
 
 	// init camera
 	m_camera.init(m_window->getScreenWidth(), m_window->getScreenHeight());
 	m_camera.setScale(4.0f);
 	m_camera.setPosition(glm::vec2(0.0f, 0.0f));
-
+	std::cout << m_window->getScreenWidth() << "," << m_window->getScreenHeight() << std::endl;
 	initUI();
 
 	// init the physics system with no gravity
@@ -52,8 +51,7 @@ void GameScreen::onEntry() {
 	m_spriteSystem.setRenderer(&m_defaultRenderer);
 	m_spriteSystem.initSystem(&m_camera);
 
-	spawnEnemy("Assets/Textures/Entities/square.png", glm::vec2(0.0f), 16.0f, 16.0f);
-	std::cout << "AFTER ADD: " << m_entityManager.getEntity(0)->m_physicsComponent->lol << std::endl;
+	spawnEnemy("Assets/Textures/Entities/square.png", glm::vec2(200.0f, 200.0f), 16.0f, 16.0f);
 }
 
 
@@ -62,16 +60,18 @@ void GameScreen::onExit() {
 
 
 void GameScreen::update(float deltaTime) {
-	std::cout << "Update" << std::endl;
+	m_camera.update();
 	m_physicsSystem.run(deltaTime);
 	checkInput();
+	if (m_game->inputManager.isKeyDown(SDL_BUTTON_LEFT)) {
+		std::cout << m_game->inputManager.getMouseCoords().x << ", " << m_game->inputManager.getMouseCoords().y << std::endl;
+	}
 }
 
 
 void GameScreen::draw() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-	std::cout << "Draw" << std::endl;
 	// pass in deltaTime = 0.0f for sprite system as not needed
 	m_spriteSystem.run(0.0f);
 }
@@ -80,12 +80,10 @@ void GameScreen::draw() {
 void GameScreen::initUI() {
 	m_gui.init("GUI");
 	SDL_ShowCursor(1);
-	std::cout << "Init UI" << std::endl;
 }
 
 
 void GameScreen::checkInput() {
-	std::cout << "Check Input" << std::endl;
 	SDL_Event evnt;
 	while (SDL_PollEvent(&evnt)) {
 		m_game->onSDLEvent(evnt);
@@ -96,12 +94,11 @@ void GameScreen::checkInput() {
 			break;
 		}
 	}
-
 }
 
 void GameScreen::spawnEnemy(const std::string & spriteTexturePath, glm::vec2 initialPosition, const float& width, const float& height) {
 	Tempest::glTexture spriteTexture = Tempest::ResourceManager::getTexture(spriteTexturePath);
-	PhysicsComponent* enemyPhysics = m_physicsSystem.addComponent(b2_dynamicBody, initialPosition.x, initialPosition.y, 0.0f);
+	PhysicsComponent* enemyPhysics = m_physicsSystem.addComponent(b2_dynamicBody, glm::vec2(width, height), initialPosition.x, initialPosition.y, 0.0f);
 	SpriteComponent* enemySprite = m_spriteSystem.addComponent(spriteTexture, Tempest::ColorRGBA8(255, 255, 255, 255), width, height);
 	m_entityManager.addEntity(nullptr, enemyPhysics, enemySprite);
 }

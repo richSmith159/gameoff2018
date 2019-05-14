@@ -1,14 +1,14 @@
 #pragma once
 
 #include <Box2D\Box2D.h>
-
+#include <glm\glm\glm.hpp>
 #include "IComponent.h"
 
 
 class PhysicsComponent : public IComponent
 {
 public:
-	PhysicsComponent(b2BodyType bodyType, float xPos, float yPos, float angle, b2World* physicsWorldHandle);
+	PhysicsComponent(b2BodyType bodyType, glm::vec2 boundingDims, float xPos, float yPos, float angle, b2World* physicsWorldHandle);
 	~PhysicsComponent();
 
 	virtual void onInsert() override;

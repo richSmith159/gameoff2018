@@ -21,8 +21,8 @@ void PhysicsSystem::run(float deltaTime) {
 	m_world->Step(1.0f / 60.0f, 6, 2);
 }
 
-PhysicsComponent* PhysicsSystem::addComponent(b2BodyType bodyType, float xPos, float yPos, float angle) {
-	PhysicsComponent* component = new PhysicsComponent(bodyType, xPos, yPos, angle, m_world.get());
+PhysicsComponent* PhysicsSystem::addComponent(b2BodyType bodyType, glm::vec2 boundingDims, float xPos, float yPos, float angle) {
+	PhysicsComponent* component = new PhysicsComponent(bodyType, boundingDims, xPos, yPos, angle, m_world.get());
 	m_components.push_back(component);
 	return component;
 }

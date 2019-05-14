@@ -2,7 +2,7 @@
 
 
 
-PhysicsComponent::PhysicsComponent(b2BodyType bodyType, float xPos, float yPos, float angle, b2World* physicsWorldHandle) {
+PhysicsComponent::PhysicsComponent(b2BodyType bodyType, glm::vec2 boundingDims, float xPos, float yPos, float angle, b2World* physicsWorldHandle) {
 	b2BodyDef def;
 	def.type = bodyType;
 	def.position.Set(xPos, yPos);
@@ -13,7 +13,7 @@ PhysicsComponent::PhysicsComponent(b2BodyType bodyType, float xPos, float yPos, 
 	// init physics fixtures
 	b2PolygonShape squareShape;
 	b2FixtureDef fixtureDef;
-	squareShape.SetAsBox(8, 8);
+	squareShape.SetAsBox(boundingDims.x, boundingDims.y);
 	fixtureDef.shape = &squareShape;
 	m_fixtures[0] = m_body->CreateFixture(&fixtureDef);
 }
