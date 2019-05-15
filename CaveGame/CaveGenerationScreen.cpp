@@ -36,6 +36,9 @@ void CaveGenerationScreen::onEntry() {
 	m_camera.setPosition(glm::vec2(0.0f, 0.0f));
 
 	initUI();
+
+	m_caveMap.init(100, 100, 45);
+
 }
 
 

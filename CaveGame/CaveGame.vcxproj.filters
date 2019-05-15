@@ -24,12 +24,18 @@
     <ClCompile Include="CaveGenerationScreen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CaveMap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CaveGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CaveGenerationScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CaveMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
