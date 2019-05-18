@@ -28,9 +28,9 @@ namespace Tempest {
 		glm::mat4 getCameraMatrix() { return m_cameraMatrix; }
 		float getAspectRatio() { return (float)m_screenWidth / (float)m_screenHeight; }
 
+		bool isBoundingBoxInCameraView(const glm::vec2& position, const glm::vec2& dimensions);
 
 	private:
-
 
 		int m_screenWidth, m_screenHeight;
 		bool m_matrixUpdateRequired;
@@ -38,7 +38,6 @@ namespace Tempest {
 		glm::vec2 m_position;
 		glm::mat4 m_cameraMatrix;
 		glm::mat4 m_orthogonalMatrix;
-
 
 	};
 

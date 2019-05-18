@@ -39,14 +39,9 @@ void CaveGenerationScreen::onEntry() {
 
 	initUI();
 
-	m_caveMap.init(10, 10, 45);
+	m_caveMap.init(60, 60, 47);
 	m_renderer.init();
-	Cell* firstCell = m_caveMap.getCell(0, 0);
-	for (int i = 0; i < 25; i ++) {
-		Cell* cell = m_caveMap.getCell(i);
-		std::cout << cell->position.x << ", " << cell->position.y << std::endl;
 
-	}
 }
 
 
@@ -76,7 +71,13 @@ void CaveGenerationScreen::update(float deltaTime) {
 	if (m_game->inputManager.isKeyDown(SDLK_ESCAPE)) {
 		exit(69);
 	}
-	// std::cout << "FPS: " << m_game->getFPS() << std::endl;
+	if (m_game->inputManager.isKeyDown(SDLK_e)) {
+		m_camera.offsetScale(0.05f);
+	}
+	if (m_game->inputManager.isKeyDown(SDLK_q)) {
+		m_camera.offsetScale(-0.05f);
+	}
+	//std::cout << "FPS: " << m_game->getFPS() << std::endl;
 }
 
 
@@ -84,18 +85,20 @@ void CaveGenerationScreen::draw() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.05f, 0.05f, 0.05f, 0.0f);
 	m_renderer.begin(&m_camera);
-	static const glm::vec4 simpleUV = glm::vec4(0.0f, 0.0f, 1.0f, 1.0f);
+	static const glm::vec4 SIMPLE_UV = glm::vec4(0.0f, 0.0f, 1.0f, 1.0f);
 
 	for (int i = 0; i < m_caveMap.getTotalCells(); i++) {
 		Cell* currentCell = m_caveMap.getCell(i);
-		m_renderer.render(
-			currentCell->calculateDestRect(),
-			simpleUV,
-			currentCell->texture.id,
-			1,
-			currentCell->color,
-			0.0f
-		);
+		if (m_camera.isBoundingBoxInCameraView(currentCell->position, glm::vec2(CELL_WIDTH))) {
+			m_renderer.render(
+				currentCell->calculateDestRect(),
+				SIMPLE_UV,
+				currentCell->texture.id,
+				1,
+				currentCell->color,
+				0.0f
+			);
+		}
 	}
 
 	m_renderer.end();
