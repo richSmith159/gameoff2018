@@ -6,6 +6,8 @@
 #include <Tempest\Camera2D.h>
 
 #include "CaveMap.h"
+#include "SimpleRenderer.h"
+
 
 class CaveGenerationScreen : public Tempest::IGameScreen
 {
@@ -29,6 +31,7 @@ private:
 	Tempest::Camera2D m_camera;
 
 	CaveMap m_caveMap;
+	SimpleRenderer m_renderer;
 
 };
 

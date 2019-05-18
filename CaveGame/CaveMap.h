@@ -18,8 +18,8 @@ struct Cell {
 		return glm::vec4(
 			position.x,
 			position.y,
-			position.x + CELL_WIDTH,
-			position.y + CELL_WIDTH
+			CELL_WIDTH,
+			CELL_WIDTH
 		);
 	}
 };
@@ -31,11 +31,18 @@ public:
 	~CaveMap();
 
 	void init(int width, int height, int fillRate);
+	inline int getWidth() { return m_width; }
+	inline int getHeight() { return m_height; }
+	inline Cell* getCells() { return m_cells; }
+	Cell* getCell(int i, int j);
+	Cell* getCell(int i);
+	inline int getTotalCells() { return m_totalCells; }
 
 private:
 	int m_width;
 	int m_height;
 	int m_fillRate;
-	Cell** m_cells;
+	int m_totalCells;
+	Cell* m_cells;
 };
 

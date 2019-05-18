@@ -132,11 +132,13 @@
     <ClCompile Include="CaveGenerationScreen.cpp" />
     <ClCompile Include="CaveMap.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SimpleRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CaveGame.h" />
     <ClInclude Include="CaveGenerationScreen.h" />
     <ClInclude Include="CaveMap.h" />
+    <ClInclude Include="SimpleRenderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
