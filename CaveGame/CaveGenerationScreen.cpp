@@ -46,7 +46,7 @@ void CaveGenerationScreen::onEntry() {
 
 
 void CaveGenerationScreen::onExit() {
-	// empty
+	m_gui.destroy();
 }
 
 void CaveGenerationScreen::update(float deltaTime) {
@@ -78,6 +78,7 @@ void CaveGenerationScreen::update(float deltaTime) {
 		m_camera.offsetScale(-0.05f);
 	}
 	//std::cout << "FPS: " << m_game->getFPS() << std::endl;
+	m_gui.update();
 }
 
 
@@ -102,12 +103,17 @@ void CaveGenerationScreen::draw() {
 	}
 
 	m_renderer.end();
+	m_gui.draw();
 }
 
 
 void CaveGenerationScreen::initUI() {
 	m_gui.init("GUI");
 	SDL_ShowCursor(1);
+
+	m_gui.loadScheme("TaharezLook.scheme");
+	m_gui.setFont("DejaVuSans-10");
+
 }
 
 

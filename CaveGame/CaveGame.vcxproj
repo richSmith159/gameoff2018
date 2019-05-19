@@ -131,13 +131,20 @@
     <ClCompile Include="CaveGame.cpp" />
     <ClCompile Include="CaveGenerationScreen.cpp" />
     <ClCompile Include="CaveMap.cpp" />
+    <ClCompile Include="Character.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainMenuScreen.cpp" />
+    <ClCompile Include="PlayerProfile.cpp" />
     <ClCompile Include="SimpleRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CaveGame.h" />
+    <ClInclude Include="CaveGameScreenIndices.h" />
     <ClInclude Include="CaveGenerationScreen.h" />
     <ClInclude Include="CaveMap.h" />
+    <ClInclude Include="Character.h" />
+    <ClInclude Include="MainMenuScreen.h" />
+    <ClInclude Include="PlayerProfile.h" />
     <ClInclude Include="SimpleRenderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
