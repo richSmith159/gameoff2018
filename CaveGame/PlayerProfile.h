@@ -2,6 +2,7 @@
 
 #include <map>
 #include <vector>
+#include <string>
 #include "Character.h"
 
 class PlayerProfile
@@ -10,7 +11,7 @@ public:
 	PlayerProfile();
 	~PlayerProfile();
 
-	void init(const char* name, const int& initialMoney);
+	void init(std::string name, const int& initialMoney);
 	
 	int getMoney() { return m_money; }
 	int getCavesExplored() { return m_cavesExplored; }
@@ -23,10 +24,9 @@ public:
 
 
 private:
-	const char* m_name;
+	std::string m_name;
 	int m_cavesExplored;
 	int m_money = 0;
 	std::map<int, Character> m_characters;
 	
 };
-

@@ -83,6 +83,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SDL2.lib;SDL2_mixer.lib;SDL2main.lib;opengl32.lib;glew32.lib;OpenAL32.lib;SOIL.lib;Box2D.lib;CEGUIBase-0_d.lib;CEGUICoreWindowRendererSet_d.lib;CEGUIExpatParser_d.lib;CEGUIOpenGLRenderer-0_d.lib;CEGUISILLYImageCodec_d.lib;Tempest.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -132,9 +133,11 @@
     <ClCompile Include="CaveGenerationScreen.cpp" />
     <ClCompile Include="CaveMap.cpp" />
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuScreen.cpp" />
     <ClCompile Include="PlayerProfile.cpp" />
+    <ClCompile Include="ProfileManagementScreen.cpp" />
     <ClCompile Include="SimpleRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -143,8 +146,10 @@
     <ClInclude Include="CaveGenerationScreen.h" />
     <ClInclude Include="CaveMap.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="MainMenuScreen.h" />
     <ClInclude Include="PlayerProfile.h" />
+    <ClInclude Include="ProfileManagementScreen.h" />
     <ClInclude Include="SimpleRenderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

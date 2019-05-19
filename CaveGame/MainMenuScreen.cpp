@@ -2,9 +2,10 @@
 #include <Tempest\IMainGame.h>
 #include "CaveGameScreenIndices.h"
 #include "PlayerProfile.h"
-
+#include "GameState.h"
 
 MainMenuScreen::MainMenuScreen(Tempest::Window* window) {
+	m_index = MAIN_MENU_SCREEN;
 	m_window = window;
 }
 
@@ -173,6 +174,12 @@ void MainMenuScreen::initUI() {
 			CEGUI::Event::Subscriber(&MainMenuScreen::onCancelNewProfileClicked, this)
 		);
 
+		m_createProfileButton->subscribeEvent(
+			CEGUI::RadioButton::EventMouseClick,
+			CEGUI::Event::Subscriber(&MainMenuScreen::onConfirmNewProfileClicked, this)
+		);
+
+
 		m_newProfileLabel->setText("Profile Name");
 		m_newProfileGroupBox->setText("New Profile");
 		m_createProfileButton->setText("Confirm");
@@ -215,9 +222,13 @@ bool MainMenuScreen::onCancelNewProfileClicked(const CEGUI::EventArgs & e) {
 
 bool MainMenuScreen::onConfirmNewProfileClicked(const CEGUI::EventArgs & e) {
 	PlayerProfile newProfile;
-	newProfile.init(m_nameInput->getText().c_str(), 200);
+	newProfile.init(std::string(m_nameInput->getText().c_str()).c_str(), 200);
 	newProfile.serialize();
+	GAMESTATE::START_NEW_PROFILE = true;
+	GAMESTATE::SELECTED_PROFILE_NAME = m_nameInput->getText().c_str();
+	m_currentState = Tempest::ScreenState::CHANGE_NEXT;
 	return true;
+
 }
 
 void MainMenuScreen::checkInput() {
