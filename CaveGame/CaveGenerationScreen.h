@@ -34,7 +34,6 @@ private:
 	CaveMap m_caveMap;
 	SimpleRenderer m_renderer;
 
-
 	CEGUI::PushButton* m_testButton = nullptr;
 	CEGUI::GroupBox* m_groupBox = nullptr;
 

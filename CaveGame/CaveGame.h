@@ -1,9 +1,9 @@
 #pragma once
 
 #include <Tempest\IMainGame.h>
-
 #include "CaveGenerationScreen.h"
 #include "MainMenuScreen.h"
+#include "ProfileManagementScreen.h"
 
 
 class CaveGame : public Tempest::IMainGame
@@ -24,5 +24,6 @@ private:
 
 	std::unique_ptr<CaveGenerationScreen> m_caveGenerationScreen = nullptr;
 	std::unique_ptr<MainMenuScreen> m_mainMenuScreen = nullptr;
+	std::unique_ptr<ProfileManagementScreen> m_profileManagementScreen = nullptr;
 
 };
