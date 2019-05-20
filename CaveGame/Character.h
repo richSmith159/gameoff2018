@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 #include <glm\glm\glm.hpp>
 
 class Character
@@ -7,10 +8,12 @@ class Character
 public:
 	Character();
 	~Character();
-private:
-	char* m_name;
-	int m_health;
+
+protected:
+	std::string m_name;
 	glm::vec2 m_position;
-	
+
+	int m_health;
+	float m_speed;
 };
 

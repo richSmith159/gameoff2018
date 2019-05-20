@@ -223,12 +223,11 @@ bool MainMenuScreen::onCancelNewProfileClicked(const CEGUI::EventArgs & e) {
 bool MainMenuScreen::onConfirmNewProfileClicked(const CEGUI::EventArgs & e) {
 	PlayerProfile newProfile;
 	newProfile.init(std::string(m_nameInput->getText().c_str()).c_str(), 200);
-	newProfile.serialize();
+	m_playerSerializer.serialize(&newProfile);
 	GAMESTATE::START_NEW_PROFILE = true;
-	GAMESTATE::SELECTED_PROFILE_NAME = m_nameInput->getText().c_str();
+	GAMESTATE::SELECTED_PROFILE_NAME = newProfile.getName();
 	m_currentState = Tempest::ScreenState::CHANGE_NEXT;
 	return true;
-
 }
 
 void MainMenuScreen::checkInput() {

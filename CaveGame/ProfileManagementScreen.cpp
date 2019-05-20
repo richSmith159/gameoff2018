@@ -16,7 +16,7 @@ ProfileManagementScreen::~ProfileManagementScreen() {
 }
 
 int ProfileManagementScreen::getNextIndex() const {
-	return PROFILE_MANAGEMENT_SCREEN;
+	return CAVE_SCREEN;
 }
 
 int ProfileManagementScreen::getPrevIndex() const {
@@ -39,7 +39,7 @@ void ProfileManagementScreen::onEntry() {
 
 	initUI();
 
-	m_currentProfile.deserialize(GAMESTATE::SELECTED_PROFILE_NAME);
+	m_playerSerializer.initPlayerFromFile(&m_currentProfile);
 	
 }
 
@@ -68,11 +68,25 @@ void ProfileManagementScreen::initUI() {
 	SDL_ShowCursor(1);
 
 	CEGUI::WindowManager& winManager = CEGUI::WindowManager::getSingleton();
+	m_playNextMapButton = static_cast<CEGUI::PushButton*>(
+		m_gui.createWidget("TaharezLook/Button",
+			glm::vec4(0.45f, 0.30f, 0.1f, 0.035f),
+			glm::vec4(0.0f),
+			"Play Map"
+		)
+	);
 
+	m_playNextMapButton->subscribeEvent(
+		CEGUI::RadioButton::EventMouseClick,
+		CEGUI::Event::Subscriber(&ProfileManagementScreen::onPlayNextPressed, this)
+	);
 }
 
-void ProfileManagementScreen::loadProfile(std::string profileName) {
-
+bool ProfileManagementScreen::onPlayNextPressed() {
+	m_currentProfile.serialize();
+	GAMESTATE::SELECTED_PROFILE_NAME = m_currentProfile.getName();
+	m_currentState = Tempest::ScreenState::CHANGE_NEXT;
+	return true;
 }
 
 void ProfileManagementScreen::checkInput() {

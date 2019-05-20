@@ -5,6 +5,8 @@
 #include <Tempest\GUI.h>
 #include <Tempest\Camera2D.h>
 
+#include "PlayerSerializer.h"
+
 
 class MainMenuScreen : public Tempest::IGameScreen
 {
@@ -47,5 +49,7 @@ private:
 	bool onNewProfileClicked(const CEGUI::EventArgs& e);
 	bool onCancelNewProfileClicked(const CEGUI::EventArgs& e);
 	bool onConfirmNewProfileClicked(const CEGUI::EventArgs& e);
+
+	PlayerSerializer m_playerSerializer;
 
 };

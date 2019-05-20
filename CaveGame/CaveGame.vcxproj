@@ -136,6 +136,7 @@
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuScreen.cpp" />
+    <ClCompile Include="Miner.cpp" />
     <ClCompile Include="PlayerProfile.cpp" />
     <ClCompile Include="ProfileManagementScreen.cpp" />
     <ClCompile Include="SimpleRenderer.cpp" />
@@ -148,6 +149,7 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="MainMenuScreen.h" />
+    <ClInclude Include="Miner.h" />
     <ClInclude Include="PlayerProfile.h" />
     <ClInclude Include="ProfileManagementScreen.h" />
     <ClInclude Include="SimpleRenderer.h" />
