@@ -4,6 +4,8 @@
 #include <Tempest\GUI.h>
 #include <Tempest\Camera2D.h>
 
+#include "PlayerProfile.h"
+
 
 class ProfileManagementScreen : public Tempest::IGameScreen
 {
@@ -23,10 +25,14 @@ public:
 private:
 	void checkInput();
 	void initUI();
+	void loadProfile(std::string profileName);
 
 	Tempest::Window* m_window;
 	Tempest::GUI m_gui;
 	Tempest::Camera2D m_camera;
 
+	PlayerProfile m_currentProfile;
+
+	CEGUI::GroupBox* m_initialGroupBox = nullptr;
 
 };

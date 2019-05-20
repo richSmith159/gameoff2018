@@ -39,10 +39,8 @@ void ProfileManagementScreen::onEntry() {
 
 	initUI();
 
-	std::cout << GAMESTATE::SELECTED_PROFILE_NAME << std::endl;
+	m_currentProfile.deserialize(GAMESTATE::SELECTED_PROFILE_NAME);
 	
-	
-
 }
 
 void ProfileManagementScreen::onExit() {
@@ -70,6 +68,10 @@ void ProfileManagementScreen::initUI() {
 	SDL_ShowCursor(1);
 
 	CEGUI::WindowManager& winManager = CEGUI::WindowManager::getSingleton();
+
+}
+
+void ProfileManagementScreen::loadProfile(std::string profileName) {
 
 }
 

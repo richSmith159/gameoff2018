@@ -1,5 +1,6 @@
 #include "PlayerProfile.h"
 #include <rapidjson\filewritestream.h>
+#include <rapidjson/istreamwrapper.h>
 #include <rapidjson\writer.h>
 #include <cstdio>
 #include <windows.h>
@@ -48,4 +49,19 @@ void PlayerProfile::serialize() {
 	std::ofstream out(filepath);
 	out << strBuffer.GetString();
 	out.close();
+}
+
+void PlayerProfile::deserialize(std::string name) {
+	char result[128];
+	std::string currentDir = std::string(result, GetCurrentDirectoryA(MAX_PATH, result));
+	std::string filepath = currentDir + "\\data\\" + name + ".json";
+
+	std::ifstream stream(filepath);
+	rapidjson::IStreamWrapper wrapper(stream);
+	rapidjson::Document document;
+	document.ParseStream(wrapper);
+	m_name = document["name"].GetString();
+	m_money = document["money"].GetInt();
+	m_cavesExplored = document["caves_explored"].GetInt();
+
 }

@@ -20,7 +20,7 @@ public:
 	void offsetMoney(const int& offset) { m_money += offset; }
 
 	void serialize();
-	void deserialize();
+	void deserialize(std::string name);
 
 
 private:
