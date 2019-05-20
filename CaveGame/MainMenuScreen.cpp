@@ -3,6 +3,7 @@
 #include "CaveGameScreenIndices.h"
 #include "PlayerProfile.h"
 #include "GameState.h"
+#include <iostream>
 
 MainMenuScreen::MainMenuScreen(Tempest::Window* window) {
 	m_index = MAIN_MENU_SCREEN;
@@ -133,7 +134,6 @@ void MainMenuScreen::initUI() {
 		);
 
 		CEGUI::WindowManager& winManager = CEGUI::WindowManager::getSingleton();
-		// m_newProfileLabel = winManager.createWindow("TaharezLook/Label", "");
 
 		m_newProfileLabel = static_cast<CEGUI::Window*>(
 			m_gui.createWidget(

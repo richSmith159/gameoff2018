@@ -43,10 +43,10 @@ void PlayerSerializer::serialize(PlayerProfile * player) {
 
 }
 
-void PlayerSerializer::initPlayerFromFile(PlayerProfile * player) {
+void PlayerSerializer::initPlayerFromFile(PlayerProfile * player, std::string nameLookup) {
 	char result[128];
 	std::string currentDir = std::string(result, GetCurrentDirectoryA(MAX_PATH, result));
-	std::string filepath = currentDir + "\\data\\" + player->getName() + ".json";
+	std::string filepath = currentDir + "\\data\\" + nameLookup + ".json";
 
 	std::ifstream stream(filepath);
 	rapidjson::IStreamWrapper wrapper(stream);

@@ -38,8 +38,7 @@ void ProfileManagementScreen::onEntry() {
 	m_camera.setPosition(glm::vec2(0.0f, 0.0f));
 
 	initUI();
-
-	m_playerSerializer.initPlayerFromFile(&m_currentProfile);
+	m_playerSerializer.initPlayerFromFile(&m_currentProfile, GAMESTATE::SELECTED_PROFILE_NAME);
 	
 }
 
@@ -83,7 +82,7 @@ void ProfileManagementScreen::initUI() {
 }
 
 bool ProfileManagementScreen::onPlayNextPressed() {
-	m_currentProfile.serialize();
+	m_playerSerializer.serialize(&m_currentProfile);
 	GAMESTATE::SELECTED_PROFILE_NAME = m_currentProfile.getName();
 	m_currentState = Tempest::ScreenState::CHANGE_NEXT;
 	return true;

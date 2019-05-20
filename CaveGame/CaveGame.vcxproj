@@ -138,6 +138,7 @@
     <ClCompile Include="MainMenuScreen.cpp" />
     <ClCompile Include="Miner.cpp" />
     <ClCompile Include="PlayerProfile.cpp" />
+    <ClCompile Include="PlayerSerializer.cpp" />
     <ClCompile Include="ProfileManagementScreen.cpp" />
     <ClCompile Include="SimpleRenderer.cpp" />
   </ItemGroup>
@@ -151,6 +152,7 @@
     <ClInclude Include="MainMenuScreen.h" />
     <ClInclude Include="Miner.h" />
     <ClInclude Include="PlayerProfile.h" />
+    <ClInclude Include="PlayerSerializer.h" />
     <ClInclude Include="ProfileManagementScreen.h" />
     <ClInclude Include="SimpleRenderer.h" />
   </ItemGroup>

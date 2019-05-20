@@ -8,6 +8,6 @@ public:
 	PlayerSerializer();
 	~PlayerSerializer();
 	void serialize(PlayerProfile* player);
-	void initPlayerFromFile(PlayerProfile* player);
+	void initPlayerFromFile(PlayerProfile* player, std::string nameLookup);
 };
 
