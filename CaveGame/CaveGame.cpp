@@ -23,7 +23,7 @@ void CaveGame::addScreens() {
 	m_screenList->addScreen(m_mainMenuScreen.get());
 	m_screenList->addScreen(m_caveGenerationScreen.get());
 	m_screenList->addScreen(m_profileManagementScreen.get());
-	m_screenList->setScreen(m_mainMenuScreen->getIndex());
+	m_screenList->setScreen(m_caveGenerationScreen->getIndex());
 }
 
 void CaveGame::onExit() {

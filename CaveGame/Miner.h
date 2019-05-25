@@ -11,7 +11,14 @@ public:
 	Miner();
 	~Miner();
 
-	void init(std::string name, glm::vec2 initialPosition);
+	void init(
+		std::string name,
+		int initialHealth,
+		float speed,
+		glm::vec2 initialPosition,
+		glm::vec2 direction,
+		Tempest::glTexture texture
+	);
 	void setTarget(Cell* newTarget) { m_target = newTarget; }
 	void update(float deltaTime);
 

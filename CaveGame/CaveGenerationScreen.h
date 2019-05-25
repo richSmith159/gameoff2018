@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <map>
 #include <Tempest\Window.h>
 #include <Tempest\IGameScreen.h>
 #include <Tempest\GUI.h>
@@ -8,6 +9,7 @@
 
 #include "CaveMap.h"
 #include "SimpleRenderer.h"
+#include "Miner.h"
 
 
 class CaveGenerationScreen : public Tempest::IGameScreen
@@ -36,6 +38,9 @@ private:
 
 	CEGUI::PushButton* m_testButton = nullptr;
 	CEGUI::GroupBox* m_groupBox = nullptr;
+
+	std::map<int, Miner> m_miners;
+	Miner m_testMiner;
 
 };
 

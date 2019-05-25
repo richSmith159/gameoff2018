@@ -41,14 +41,14 @@ in vec2 fragmentPosition;
 in vec4 fragmentColor;
 in vec2 fragmentUV;
 
-// output color
 out vec4 color;
 
 uniform sampler2D textureSampler;
 
 void main() {
-    
+
     vec4 textureColor = texture(textureSampler, fragmentUV);
+    
     color = fragmentColor * textureColor;
 }
 )";
@@ -68,6 +68,7 @@ void SimpleRenderer::init() {
 	// init the shader program and spritebatch
 	m_program.init();
 	m_spriteBatch.init();
+	m_characterSpriteBatch.init();
 
 	// init and compile shaders
 	m_vertexShader.init(Tempest::ShaderType::VERTEX);
@@ -80,14 +81,14 @@ void SimpleRenderer::init() {
 	m_program.bindAttribute("vertexColor");
 	m_program.bindAttribute("vertexUV");
 	m_program.linkShaders(m_vertexShader.getShaderID(), m_fragmentShader.getShaderID());
-
 }
 
 void SimpleRenderer::begin(Tempest::Camera2D * camera) {
 
 	// use the program and set the texture uniform location
 	m_program.use();
-	
+	m_spriteBatch.init();
+	m_spriteBatch.begin(Tempest::GlyphSortType::BACK_TO_FRONT);
 	glActiveTexture(GL_TEXTURE0);
 
 	GLint textureUniform = m_program.getUniformLocation("textureSampler");
@@ -98,11 +99,14 @@ void SimpleRenderer::begin(Tempest::Camera2D * camera) {
 	GLint pUniform = m_program.getUniformLocation("P");
 	glUniformMatrix4fv(pUniform, 1, GL_FALSE, &projectionMatrix[0][0]);
 
-	// start using the spritebatch for drawing entities
-	m_spriteBatch.begin();
+	// start using the spritebatch for drawing tiles
+	// m_spriteBatch.begin(Tempest::GlyphSortType::BACK_TO_FRONT);
+
+	// start using the spritebatch for drawing characters
+	// m_characterSpriteBatch.begin(Tempest::GlyphSortType::BACK_TO_FRONT);
 }
 
-void SimpleRenderer::render(glm::vec4 destRect, glm::vec4 uvRect, int textureID, float depth, Tempest::ColorRGBA8 color, float angle) {
+void SimpleRenderer::renderTile(glm::vec4 destRect, glm::vec4 uvRect, int textureID, float depth, Tempest::ColorRGBA8 color, float angle) {
 	m_spriteBatch.draw(
 		destRect,
 		uvRect,
@@ -113,10 +117,23 @@ void SimpleRenderer::render(glm::vec4 destRect, glm::vec4 uvRect, int textureID,
 	);
 }
 
+void SimpleRenderer::renderCharacter(glm::vec4 destRect, glm::vec4 uvRect, int textureID, float depth, Tempest::ColorRGBA8 color, glm::vec2 direction) {
+	m_spriteBatch.draw(
+		destRect,
+		uvRect,
+		textureID,
+		depth,
+		color,
+		direction
+	);
+}
+
 void SimpleRenderer::end() {
 
 	m_spriteBatch.end();
+	//m_characterSpriteBatch.end();
 	m_spriteBatch.renderBatch();
+	// m_characterSpriteBatch.renderBatch();
 	m_program.unuse();
 
 }
