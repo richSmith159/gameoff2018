@@ -14,10 +14,10 @@ public:
 
 	void init();
 	void begin(Tempest::Camera2D* camera);
-	void initTileSpriteBatch() { m_spriteBatch.init(); m_spriteBatch.begin(Tempest::GlyphSortType::BACK_TO_FRONT); }
-	void endTileSpriteBatch() { m_spriteBatch.end(); m_spriteBatch.renderBatch(); };
-	void initCharacterSpriteBatch() { m_characterSpriteBatch.init(); m_characterSpriteBatch.begin(Tempest::GlyphSortType::BACK_TO_FRONT); };
-	void endCharacterSpriteBatch() { m_characterSpriteBatch.end(); m_characterSpriteBatch.renderBatch(); };
+	void beginTileSpriteBatch() { m_spriteBatch.begin(Tempest::GlyphSortType::BACK_TO_FRONT); }
+	void endTileSpriteBatch() { m_spriteBatch.end(); };
+	void beginCharacterSpriteBatch() { m_characterSpriteBatch.begin(Tempest::GlyphSortType::BACK_TO_FRONT); };
+	void endCharacterSpriteBatch() { m_characterSpriteBatch.end(); };
 	void renderTile(glm::vec4 destRect, glm::vec4 uvRect, int textureID, float depth, Tempest::ColorRGBA8 color, float angle);
 	void renderCharacter(glm::vec4 destRect, glm::vec4 uvRect, int textureID, float depth, Tempest::ColorRGBA8 color, glm::vec2 direction);
 	void end();

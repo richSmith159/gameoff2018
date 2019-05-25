@@ -43,8 +43,8 @@ void CaveGenerationScreen::onEntry() {
 	m_renderer.init();
 	Tempest::glTexture minerTexture = Tempest::ResourceManager::getTexture("Textures/player.png");
 	
-	m_testMiner.init("test", 100, 3.0f, glm::vec2(0.0f), glm::vec2(1.0f, 0.0f), minerTexture);
-
+	m_testMiner.init("test", 100, 3.0f, glm::vec2(1.0f), glm::vec2(1.0f, 0.0f), minerTexture);
+	glClearColor(0.25f, 0.25f, 0.25f, 0.0f);
 }
 
 
@@ -86,14 +86,14 @@ void CaveGenerationScreen::update(float deltaTime) {
 
 
 void CaveGenerationScreen::draw() {
-	glClearDepth(1.0);
+	static const glm::vec4 SIMPLE_UV = glm::vec4(0.0f, 0.0f, 1.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	// glClearDepth(1.0);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glClearColor(0.25f, 0.25f, 0.25f, 0.0f);
 
-	static const glm::vec4 SIMPLE_UV = glm::vec4(0.0f, 0.0f, 1.0f, 1.0f);
 	m_renderer.begin(&m_camera);
+	m_renderer.beginTileSpriteBatch();
 	for (int i = 0; i < m_caveMap.getTotalCells(); i++) {
 		Cell* currentCell = m_caveMap.getCell(i);
 		if (m_camera.isBoundingBoxInCameraView(currentCell->position, glm::vec2(CELL_WIDTH))) {
@@ -107,35 +107,8 @@ void CaveGenerationScreen::draw() {
 			);
 		}
 	}
-	m_renderer.renderCharacter(
-		m_testMiner.calculateDestRect(),
-		SIMPLE_UV,
-		m_testMiner.getTexture().id,
-		1.0f,
-		Tempest::ColorRGBA8(255, 255, 255, 255),
-		m_testMiner.getDirection()
-	);
-	m_renderer.end();
-
-	/*
-	m_renderer.begin(&m_camera);
-
-	m_renderer.initTileSpriteBatch();
-	for (int i = 0; i < m_caveMap.getTotalCells(); i++) {
-		Cell* currentCell = m_caveMap.getCell(i);
-		if (m_camera.isBoundingBoxInCameraView(currentCell->position, glm::vec2(CELL_WIDTH))) {
-			m_renderer.renderTile(
-				currentCell->calculateDestRect(),
-				SIMPLE_UV,
-				currentCell->texture.id,
-				1.0f,
-				currentCell->color,
-				0.0f
-			);
-		}
-	}
 	m_renderer.endTileSpriteBatch();
-	m_renderer.initCharacterSpriteBatch();
+	m_renderer.beginCharacterSpriteBatch();
 	m_renderer.renderCharacter(
 		m_testMiner.calculateDestRect(),
 		SIMPLE_UV,
@@ -146,7 +119,6 @@ void CaveGenerationScreen::draw() {
 	);
 	m_renderer.endCharacterSpriteBatch();
 	m_renderer.end();
-	*/
 	m_gui.draw();
 }
 
