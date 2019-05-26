@@ -7,7 +7,7 @@
 
 const int CELL_WIDTH = 8;
 
-enum class CellType { ROCK, EMPTY };
+enum class CellType { ROCK, EMPTY, EXTRACTION };
 
 struct Cell {
 	CellType cellType;
@@ -33,7 +33,7 @@ public:
 	CaveMap();
 	~CaveMap();
 
-	void init(int width, int height, int fillRate);
+	void init(int width, int height, int fillRate, int numCharacters);
 	inline int getWidth() { return m_width; }
 	inline int getHeight() { return m_height; }
 	inline Cell* getCells() { return m_cells; }
@@ -45,6 +45,7 @@ private:
 	int countCellNeighboursOfType(const glm::vec2& tileCoords, CellType cellType, const int& radius);
 	void setBoundaries(const int& boundaryRadius, CellType boundaryType);
 	void populateTextureMap();
+	void setInitialExtractionPoint(int size);
 	Tempest::glTexture getTextureForCellType(CellType cellType);
 
 	int m_width;

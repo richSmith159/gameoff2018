@@ -13,7 +13,7 @@ CaveMap::~CaveMap() {
 	// emtpy
 }
 
-void CaveMap::init(int width, int height, int fillRate) {
+void CaveMap::init(int width, int height, int fillRate, int numCharacters) {
 	// init values
 	m_width = width;
 	m_height = height;
@@ -51,6 +51,8 @@ void CaveMap::init(int width, int height, int fillRate) {
 		smoothMap(1);
 	}
 	setBoundaries(1, CellType::ROCK);
+
+	setInitialExtractionPoint(1);
 }
 
 Cell * CaveMap::getCell(int i, int j) {
@@ -132,8 +134,32 @@ void CaveMap::setBoundaries(const int & boundaryRadius, CellType boundaryType) {
 void CaveMap::populateTextureMap() {
 	Tempest::glTexture rockTexture = Tempest::ResourceManager::getTexture("Textures/rock_1.jpg");
 	Tempest::glTexture emptyTexture = Tempest::ResourceManager::getTexture("Textures/empty_1.jpg");
+	Tempest::glTexture extractionTexture = Tempest::ResourceManager::getTexture("Textures/extraction.jpg");
 	m_cellTypeTextureMap.insert({CellType::ROCK, rockTexture});
 	m_cellTypeTextureMap.insert({CellType::EMPTY, emptyTexture});
+	m_cellTypeTextureMap.insert({CellType::EXTRACTION, extractionTexture});
+}
+
+void CaveMap::setInitialExtractionPoint(int size) {
+	static const int INITIAL_X_POS = 1;
+	static const int INITIAL_Y_POS = 1;
+
+	for (int i = INITIAL_X_POS; i <= (size * 2) + 2; i++) {
+		for (int j = INITIAL_Y_POS; j <= (size * 2) + 2; j++) {
+			Cell* cell = getCell(i, j);
+			cell->cellType = CellType::EMPTY;
+			cell->texture = getTextureForCellType(CellType::EMPTY);
+		}
+	}
+
+	for (int i = INITIAL_X_POS + size; i < INITIAL_X_POS + size + 2; i++) {
+		for (int j = INITIAL_Y_POS + size; j < INITIAL_Y_POS + size + 2; j++) {
+			Cell* cell = getCell(i, j);
+			cell->cellType = CellType::EXTRACTION;
+			cell->texture = getTextureForCellType(CellType::EXTRACTION);
+		}
+	 }
+
 }
 
 Tempest::glTexture CaveMap::getTextureForCellType(CellType cellType) {

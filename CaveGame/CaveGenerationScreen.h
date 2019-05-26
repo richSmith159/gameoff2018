@@ -6,6 +6,7 @@
 #include <Tempest\IGameScreen.h>
 #include <Tempest\GUI.h>
 #include <Tempest\Camera2D.h>
+#include <Tempest\LineRenderer.h>
 
 #include "CaveMap.h"
 #include "SimpleRenderer.h"
@@ -35,6 +36,7 @@ private:
 
 	CaveMap m_caveMap;
 	SimpleRenderer m_renderer;
+	Tempest::LineRenderer m_debugRenderer;
 
 	CEGUI::PushButton* m_testButton = nullptr;
 	CEGUI::GroupBox* m_groupBox = nullptr;

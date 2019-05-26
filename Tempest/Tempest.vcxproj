@@ -170,6 +170,7 @@
     <ClCompile Include="IMainGame.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="IOManager.cpp" />
+    <ClCompile Include="LineRenderer.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="ScreenList.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -190,6 +191,7 @@
     <ClInclude Include="IMainGame.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="IOManager.h" />
+    <ClInclude Include="LineRenderer.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="ScreenList.h" />
     <ClInclude Include="Sprite.h" />

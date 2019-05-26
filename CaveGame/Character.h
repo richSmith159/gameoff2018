@@ -17,12 +17,12 @@ public:
 	glm::vec2 getDirection() { return m_direction; }
 	glm::vec2 getPosition() { return m_position; }
 	std::string getName() { return m_name; }
-	bool isDead() { return m_dead; }
+	Tempest::glTexture getTexture() { return m_texture; }
 	int getHealth() { return m_health; }
 	int getCavesSurvived() { return m_cavesSurvived; }
 	float getSpeed() { return m_speed; }
+	bool isDead() { return m_dead; }
 	bool isSelected() { return m_selected; }
-	Tempest::glTexture getTexture() { return m_texture; }
 
 	// setters
 	void setDirection(glm::vec2 direction) { m_direction = direction; }
